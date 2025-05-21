@@ -7,7 +7,5 @@ export const load = async ({ locals }) => {
 		redirect(302, '/home');
 	}
 
-	return {
-		session: auth
-	};
+	redirect(302, '/auth');
 };
