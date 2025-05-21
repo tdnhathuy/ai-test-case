@@ -1,9 +1,13 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
-	const auth = await locals.auth();
+	const session = await locals.auth();
 
-	if (!auth) {
+	if (!session) {
 		redirect(302, '/');
 	}
+
+	return {
+		session: session
+	};
 };
