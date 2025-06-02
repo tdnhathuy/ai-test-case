@@ -1,56 +1,72 @@
 <script lang="ts">
 	import { Button } from '@/lib/components/ui/button';
 	import { Textarea } from '@/lib/components/ui/textarea';
-	import { createChecklist } from '@/lib/services/api.service';
-
+	import { useCreateChecklist } from '@/lib/hooks/use-checklist';
+	import Checklist from './checklist.svelte';
 	let { promptCreate } = $props();
-	let isLoading = $state(false);
-	let checklist = $state('');
-	let error = $state('');
 
-	const conClickCreateChecklist = async () => {
+	const createChecklistMutation = useCreateChecklist();
+
+	const { isPending, error, data, isError, isSuccess } = $derived($createChecklistMutation);
+
+	const isLoading = $derived(isPending);
+	const checklist = $derived(data || '');
+
+	const handleCreateChecklist = async () => {
 		if (!promptCreate.description.trim()) {
-			error = 'Vui lòng nhập mô tả test case';
 			return;
 		}
 
-		isLoading = true;
-		error = '';
+		$createChecklistMutation.mutate(promptCreate.description);
+	};
 
-		try {
-			checklist = await createChecklist(promptCreate.description);
-		} catch (err) {
-			error = err instanceof Error ? err.message : 'Có lỗi xảy ra khi tạo checklist';
-		} finally {
-			isLoading = false;
+	const resetMutation = () => {
+		$createChecklistMutation.reset();
+	};
+
+	const retryMutation = () => {
+		if (promptCreate.description.trim()) {
+			$createChecklistMutation.mutate(promptCreate.description);
 		}
 	};
 </script>
 
 <div class="flex w-full flex-col gap-4 p-4">
 	<Textarea
-		placeholder="Mô tả test case"
+		placeholder="Mô tả test case (ví dụ: test login feature)"
 		class="h-[16rem] w-full resize-none"
 		value={promptCreate.description}
 		onchange={(e) => (promptCreate.description = e.currentTarget.value)}
 	/>
 
-	<Button class="w-fit" onclick={conClickCreateChecklist} disabled={isLoading}>
-		{isLoading ? 'Đang tạo...' : 'Tạo checklist'}
-	</Button>
+	<div class="flex gap-2">
+		<Button class="w-fit" onclick={handleCreateChecklist} disabled={isLoading}>
+			{#if isLoading}
+				<svg class="mr-2 h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24">
+					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"
+					></circle>
+					<path
+						class="opacity-75"
+						fill="currentColor"
+						d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+					></path>
+				</svg>
+				Đang tạo...
+			{:else}
+				Tạo checklist
+			{/if}
+		</Button>
 
-	{#if error}
-		<div class="rounded border border-red-200 bg-red-50 p-3 text-sm text-red-600">
-			{error}
-		</div>
-	{/if}
+		{#if isError}
+			<Button variant="outline" onclick={retryMutation} disabled={isLoading}>Thử lại</Button>
+		{/if}
 
-	{#if checklist}
-		<div class="mt-4">
-			<h3 class="mb-2 text-lg font-semibold">Checklist được tạo:</h3>
-			<div class="rounded-lg border bg-gray-50 p-4 whitespace-pre-wrap">
-				{checklist}
-			</div>
-		</div>
+		{#if checklist || error}
+			<Button variant="outline" onclick={resetMutation} disabled={isLoading}>Xóa kết quả</Button>
+		{/if}
+	</div>
+
+	{#if isSuccess && checklist}
+		<Checklist {checklist} />
 	{/if}
 </div>

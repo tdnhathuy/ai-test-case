@@ -10,3 +10,20 @@ export { handle } from './auth';
 
 // 	return handleAuth(event);
 // };
+
+import type { HandleServerError } from '@sveltejs/kit';
+
+export const handleError: HandleServerError = ({ error, event }) => {
+	// Bỏ qua lỗi Chrome DevTools manifest
+	if (event.url.pathname === '/.well-known/appspecific/com.chrome.devtools.json') {
+		return {
+			message: 'Chrome DevTools manifest not available'
+		};
+	}
+
+	console.error('Server error:', error);
+	
+	return {
+		message: 'Internal error occurred'
+	};
+};
