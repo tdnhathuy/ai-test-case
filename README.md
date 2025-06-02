@@ -1,38 +1,11 @@
-# sv
+Tôi đang có dự án hỗ trợ QC QA viết test case. bạn có thể giúp tôi thiết kết tổng quan UI của trang web không ?
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Mô tả sơ bộ và ứng dụng.
+User phải login bằng tài khoản Google.
+Quy trình tạo các test case gồm 3 bước
+ - Bước 1 nhập các thông tin cơ bản của task, bao gồm hình ảnh, tên task, mô tả, các thông tin liên quan. Sau đó gọi API để tạo check list.
+ - Bước 2 Update checklist, có thể chỉnh sửa các check list từ AI, có thể thêm checklist. Sau đó gọi API để tạo test case.
+ - Bước 3 Nhận các test case được tạo, có thể tick select/unselect các test case. Sau đó export.
+ 
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Thiết kế giúp tôi các giao diện theo yêu cầu cho web
