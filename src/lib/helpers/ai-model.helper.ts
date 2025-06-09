@@ -1,4 +1,5 @@
 import { AI_KEY } from '$env/static/private';
+import { parseAIResponse } from '@/lib/helpers/promp.helper';
 import { GoogleGenAI } from '@google/genai';
 
 const genAI = new GoogleGenAI({ apiKey: AI_KEY });
@@ -28,14 +29,12 @@ export class AIModel {
 
 	async prompting<T>(prompt: string): Promise<T> {
 		return new Promise(async (resolve, reject) => {
-			console.log('---- MODEL ---', this.model);
-			console.log('---- PROMPT ---', prompt);
 			try {
 				const response = await genAI.models.generateContent({
 					model: this.model,
 					contents: prompt
 				});
-				resolve(response.text as T);
+				resolve(parseAIResponse(response.text || '') as T);
 			} catch (error) {
 				reject(error);
 			}

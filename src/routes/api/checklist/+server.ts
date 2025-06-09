@@ -1,5 +1,5 @@
 import { AIModel } from '@/lib/helpers/ai-model.helper';
-import { buildChecklistPrompt } from '@/lib/helpers/promp.helper';
+import { buildChecklistPrompt, parseAIResponse } from '@/lib/helpers/promp.helper';
 import type { Checklist } from '@/lib/types/app.type';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
@@ -20,9 +20,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		});
 
 		const checklist = await AIModel.getInstance().prompting<Checklist[]>(prompt);
+		console.log('checklist1', checklist);
 
 		const response = json({ checklist });
-		console.log('response', response);
 		return response;
 	} catch (error) {
 		console.error('Error creating checklist:', error);
