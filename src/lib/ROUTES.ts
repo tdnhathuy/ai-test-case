@@ -11,6 +11,7 @@
 const PAGES = {
   "/": `/`,
   "/create": `/create`,
+  "/create-test-case": `/create-test-case`,
   "/create-test-case/step-1": `/create-test-case/step-1`,
   "/create-test-case/step-2": `/create-test-case/step-2`,
   "/create-test-case/step-3": `/create-test-case/step-3`,
@@ -145,7 +146,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/create': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/auth': never }
+  PAGES: { '/': never, '/create': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/auth': never }
   SERVERS: { 'POST /api/checklist': never, 'POST /api/testcase': never }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>

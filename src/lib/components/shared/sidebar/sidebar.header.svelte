@@ -13,7 +13,7 @@
 		</Button>
 	</a>
 
-	<a href={route('/create-test-case/step-1')}>
+	<a href={route('/create-test-case')}>
 		<Button size="icon" class="w-full">
 			<Plus class="h-4 w-4" />
 			<span> Tạo mới </span>
