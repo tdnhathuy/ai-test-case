@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { Button } from '@/lib/components/ui/button';
 	import { Textarea } from '@/lib/components/ui/textarea';
-	import { useCreateChecklist } from '@/lib/hooks/use-checklist';
+	import { createChecklist } from '@/lib/services/api.service';
+	import { createMutation } from '@tanstack/svelte-query';
 	import Checklist from './checklist.svelte';
 	let { promptCreate } = $props();
 
-	const createChecklistMutation = useCreateChecklist();
+	const createChecklistMutation = createMutation({ mutationFn: createChecklist });
+	const { data: data2 } = $createChecklistMutation;
 
 	const { isPending, error, data, isError, isSuccess } = $derived($createChecklistMutation);
 
 	const isLoading = $derived(isPending);
-	const checklist = $derived(data || '');
+	const checklist = $derived(data || []);
 
 	const handleCreateChecklist = async () => {
 		if (!promptCreate.description.trim()) {

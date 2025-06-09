@@ -26,21 +26,7 @@ export function parseChecklist(raw: string): Checklist[] {
 }
 
 export function useCreateChecklist() {
-	const queryClient = useQueryClient();
-
-	return createMutation({
-		mutationFn: (description: string) => createChecklist(description),
-		onSuccess: (data, variables) => {
-			console.log('Checklist created successfully:');
-			console.log(parseChecklist(data));
-
-			// Invalidate và refetch các query liên quan nếu có
-			// queryClient.invalidateQueries({ queryKey: ['checklists'] });
-		},
-		onError: (error: Error) => {
-			console.error('Error creating checklist:', error);
-		}
-	});
+	return createMutation({ mutationFn: createChecklist });
 }
 
 // Hook để lấy lịch sử checklist (có thể implement sau)

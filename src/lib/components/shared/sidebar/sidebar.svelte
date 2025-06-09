@@ -8,7 +8,7 @@
 </script>
 
 <Sidebar.Root>
-	<SidebarHeader {session} />
+	<SidebarHeader />
 
 	<Sidebar.Content>
 		<Sidebar.Group />

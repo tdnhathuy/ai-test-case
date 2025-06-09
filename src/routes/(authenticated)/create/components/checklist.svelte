@@ -2,7 +2,6 @@
 	import type { Checklist } from '@/lib/types/app.type';
 
 	export let checklist: Checklist[];
-	console.log(' -------- checklist', checklist);
 </script>
 
 <section>
