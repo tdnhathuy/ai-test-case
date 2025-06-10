@@ -1,13 +1,13 @@
 <script lang="ts">
-	import Button from '@/lib/components/ui/button/button.svelte';
+	import { goto } from '$app/navigation';
 	import { Textarea } from '@/lib/components/ui/textarea';
+	import { route } from '@/lib/ROUTES';
 	import { createChecklist } from '@/lib/services/api.service';
+	import ButtonStep from '@/modules/create-test-case/components/button-step.svelte';
 	import ContainerStep from '@/modules/create-test-case/components/container-step.svelte';
 	import { createTestCaseStore } from '@/modules/create-test-case/stores/create-test-case.store';
 	import { createMutation } from '@tanstack/svelte-query';
 	import StepIndicator from '../components/step-indicator.svelte';
-	import { route } from '@/lib/ROUTES';
-	import { goto } from '$app/navigation';
 
 	$: description = $createTestCaseStore.step1.description || '';
 
@@ -29,15 +29,16 @@
 	}
 </script>
 
-<StepIndicator currentStep={1} />
 <ContainerStep>
-	<Textarea bind:value={description} placeholder="Enter description" class="h-48" />
+	<StepIndicator currentStep={1}>
+		{#snippet renderBtnPrev()}
+			<ButtonStep title="Previous" onClick={handleNext} isLoading={$mutation.isPending} />
+		{/snippet}
 
-	<Button
-		onclick={handleNext}
-		disabled={!description || $mutation.isPending}
-		class="w-fit self-end"
-	>
-		{$mutation.isPending ? 'Creating...' : 'Next'}
-	</Button>
+		{#snippet renderBtnNext()}
+			<ButtonStep title="Next" onClick={handleNext} isLoading={$mutation.isPending} />
+		{/snippet}
+	</StepIndicator>
+
+	<Textarea bind:value={description} placeholder="Enter description" class="h-48" />
 </ContainerStep>

@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 	import StepIndicator from '../components/step-indicator.svelte';
 	import { validateStep } from '../utils/step-validation';
+	import ButtonStep from '@/modules/create-test-case/components/button-step.svelte';
 	$: store = $createTestCaseStore;
 
 	$: checklist = $createTestCaseStore.step2.checklist.original || [];
@@ -22,9 +23,22 @@
 	const handleNext = () => {
 		goto(route('/create-test-case/step-3'));
 	};
+
+	const handlePrev = () => {
+		goto(route('/create-test-case/step-1'));
+	};
 </script>
 
-<StepIndicator currentStep={2} />
+<StepIndicator currentStep={2}>
+	{#snippet renderBtnNext()}
+		<ButtonStep title="Next" onClick={handleNext} />
+	{/snippet}
+
+	{#snippet renderBtnPrev()}
+		<ButtonStep title="Previous" onClick={handlePrev} />
+	{/snippet}
+</StepIndicator>
+
 <ContainerStep>
 	<Accordion.Root type="multiple">
 		<ul>
@@ -50,6 +64,4 @@
 			{/each}
 		</ul>
 	</Accordion.Root>
-
-	<Button onclick={handleNext} class="w-fit self-end">Next</Button>
 </ContainerStep>

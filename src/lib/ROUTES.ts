@@ -22,6 +22,7 @@ const PAGES = {
  * SERVERS
  */
 const SERVERS = {
+  "GET /api/auth/verify-token": `/api/auth/verify-token`,
   "POST /api/checklist": `/api/checklist`,
   "POST /api/testcase": `/api/testcase`
 }
@@ -147,7 +148,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 */
 export type KIT_ROUTES = {
   PAGES: { '/': never, '/create': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/auth': never }
-  SERVERS: { 'POST /api/checklist': never, 'POST /api/testcase': never }
+  SERVERS: { 'GET /api/auth/verify-token': never, 'POST /api/checklist': never, 'POST /api/testcase': never }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>
   Params: Record<string, never>
