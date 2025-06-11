@@ -1,40 +1,54 @@
 import { browser } from '$app/environment';
+import type { Session } from '@auth/sveltekit';
+import axios from 'axios';
 
-// Helper function to get JWT token from session
+type Response = { session: Session };
+const clientRequest = axios.create();
+const fetchAccessToken = () => clientRequest.get<Response>('/api/auth/session');
+
+let tokenCache: {
+	token: string | null;
+	expiresAt: number;
+} = {
+	token: null,
+	expiresAt: 0
+};
+
 export async function getAuthToken(): Promise<string | null> {
 	if (!browser) return null;
-	
+
 	try {
-		const response = await fetch('/api/auth/session');
-		const session = await response.json();
-		return session?.accessToken || null;
+		const response = await fetchAccessToken();
+		return response.data?.session?.accessToken || null;
 	} catch (error) {
 		console.error('Error getting auth token:', error);
 		return null;
 	}
 }
 
-// Helper function to make authenticated API calls
-export async function authenticatedFetch(url: string, options: RequestInit = {}): Promise<Response> {
-	const token = await getAuthToken();
-	
-	const headers: Record<string, string> = {
-		'Content-Type': 'application/json',
-		...(options.headers as Record<string, string> || {}),
-	};
-	
-	if (token) {
-		headers['Authorization'] = `Bearer ${token}`;
-	}
-	
-	return fetch(url, {
-		...options,
-		headers,
-	});
-}
+export async function getCachedAuthToken(): Promise<string | null> {
+	if (!browser) return null;
 
-// Helper function to check if user is authenticated
-export async function isAuthenticated(): Promise<boolean> {
-	const token = await getAuthToken();
-	return !!token;
-} 
+	const now = Date.now();
+
+	if (tokenCache.token && now < tokenCache.expiresAt) {
+		return tokenCache.token;
+	}
+
+	try {
+		const response = await fetch('/api/auth/session');
+		const session = await response.json();
+		const token = session?.accessToken || null;
+
+		const MINUTES = 5;
+		const expiresAt = now + MINUTES * 60 * 1000;
+		tokenCache = { token, expiresAt };
+
+		console.log('Token refreshed:', !!token);
+		return token;
+	} catch (error) {
+		console.error('Failed to get cached auth token:', error);
+		tokenCache = { token: null, expiresAt: 0 };
+		return null;
+	}
+}
