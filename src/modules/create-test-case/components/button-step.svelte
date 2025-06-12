@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '@/lib/components/ui/button/button.svelte';
+	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
 
 	interface Props {
 		title?: string;
@@ -10,4 +10,11 @@
 	let { title = 'string', onClick, disabled, isLoading }: Props = $props();
 </script>
 
-<Button onclick={onClick} disabled={disabled || isLoading} class="w-fit self-end">{title}</Button>
+<ButtonBase
+	onclick={onClick}
+	disabled={disabled || isLoading}
+	class="w-20 min-w-20 self-end"
+	loading={isLoading}
+>
+	{title}
+</ButtonBase>

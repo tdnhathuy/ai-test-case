@@ -29,17 +29,17 @@
 	};
 </script>
 
-<StepIndicator currentStep={2}>
-	{#snippet renderBtnNext()}
-		<ButtonStep title="Next" onClick={handleNext} />
-	{/snippet}
-
-	{#snippet renderBtnPrev()}
-		<ButtonStep title="Previous" onClick={handlePrev} />
-	{/snippet}
-</StepIndicator>
-
 <ContainerStep>
+	<StepIndicator currentStep={2}>
+		{#snippet renderBtnNext()}
+			<ButtonStep title="Next" onClick={handleNext} />
+		{/snippet}
+
+		{#snippet renderBtnPrev()}
+			<ButtonStep title="Previous" onClick={handlePrev} />
+		{/snippet}
+	</StepIndicator>
+
 	<Accordion.Root type="multiple">
 		<ul>
 			{#each checklist as checklist}
