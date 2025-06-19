@@ -1,11 +1,11 @@
 <script>
 	import { Footer } from '$lib/components/ui/sidebar/index.js';
 	import { signOut } from '@auth/sveltekit/client';
-	import ZButton from '../button/z-button.svelte';
+	import ButtonBase from '../../svelte/button/button-base.svelte';
 </script>
 
-<Footer class="">
-	<ZButton class="" onclick={() => signOut({ redirectTo: '/' })} size="lg">
+<Footer>
+	<ButtonBase onclick={() => signOut({ redirectTo: '/' })} size="lg">
 		<span>Đăng xuất</span>
-	</ZButton>
+	</ButtonBase>
 </Footer>

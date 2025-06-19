@@ -1,6 +1,9 @@
 import { AI_KEY } from '$env/static/private';
-import { parseAIResponse } from '@/lib/helpers/promp.helper';
-import { GoogleGenAI } from '@google/genai';
+import {
+	GoogleGenAI,
+	type GenerateContentConfig,
+	type GenerateContentParameters
+} from '@google/genai';
 
 const genAI = new GoogleGenAI({ apiKey: AI_KEY });
 
@@ -27,14 +30,17 @@ export class AIModel {
 		return this.model;
 	}
 
-	async prompting<T>(prompt: string): Promise<T> {
+	async prompting<T>(contents: string, config?: GenerateContentConfig): Promise<T> {
 		return new Promise(async (resolve, reject) => {
 			try {
-				const response = await genAI.models.generateContent({
-					model: this.model,
-					contents: prompt
-				});
-				resolve(parseAIResponse(response.text || '') as T);
+				const model = this.getModel();
+				const params: GenerateContentParameters = {
+					model,
+					contents: [{ role: 'user', parts: [{ text: contents }] }],
+					config
+				};
+				const response = await genAI.models.generateContent(params);
+				resolve(JSON.parse(response.text || '[]') as T);
 			} catch (error) {
 				reject(error);
 			}

@@ -1,18 +1,16 @@
-import type { Checklist, ChecklistItem } from '@/lib/types/app.type';
+import type { ChecklistItem } from '@/lib/types/app.type';
 import { writable } from 'svelte/store';
 
+export interface Step1Data {
+	userStory: string;
+	acceptanceCriteria: string;
+	images?: string[];
+}
+
 export interface CreateTestCaseData {
-	step1: {
-		description?: string;
-		images?: string[];
-	};
+	step1: Step1Data;
 	step2: {
-		requirements?: string[];
-		priority?: 'low' | 'medium' | 'high';
-		checklist: {
-			original: Checklist[];
-			selected: ChecklistItem[];
-		};
+		checklist: ChecklistItem[];
 	};
 	step3: {
 		testSteps?: Array<{
@@ -23,8 +21,8 @@ export interface CreateTestCaseData {
 }
 
 const defaultData: CreateTestCaseData = {
-	step1: { description: 'Login feature', images: [] },
-	step2: { requirements: [], priority: 'medium', checklist: { original: [], selected: [] } },
+	step1: { userStory: '', acceptanceCriteria: '', images: [] },
+	step2: { checklist: [] },
 	step3: { testSteps: [] }
 };
 

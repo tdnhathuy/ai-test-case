@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Label from '@/lib/components/ui/label/label.svelte';
 	import { cn } from '@/lib/utils';
 	import Steps from '@/modules/create-test-case/components/steps/steps.svelte';
 	import type { Snippet } from 'svelte';
@@ -20,7 +21,9 @@
 <div class="mx-auto mb-6 flex w-full flex-col gap-4">
 	<Steps {currentStep} />
 
-	<h1 class="text-2xl font-bold">{`Step ${currentStep}: ${titles[currentStep - 1]}`}</h1>
+	<span class="text-primary text-2xl font-semibold">
+		{`Step ${currentStep}: ${titles[currentStep - 1]}`}
+	</span>
 
 	<div class={cn('flex', classTW)}>
 		{#if renderBtnPrev}

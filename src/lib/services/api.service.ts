@@ -1,13 +1,9 @@
-import type { Checklist } from '@/lib/types/app.type';
-import { client } from './client';
+import type { ChecklistItem } from '@/lib/types/app.type';
 import { route } from '@/lib/ROUTES';
+import type { Step1Data } from '@/modules/create-test-case/stores/create-test-case.store';
+import { client } from './client';
 
-
-
-export const createChecklist = async ({ description }: { description: string }) => {
-	const response = await client.post<{ checklist: Checklist[] }>(route('POST /api/checklist'), {
-		description
-	});
-	console.log('response', response.data.checklist);
-	return response.data.checklist;
+export const createChecklist = async (payload: Step1Data) => {
+	const response = await client.post(route('POST /api/checklist'), payload);
+	return response.data.data as ChecklistItem[];
 };
