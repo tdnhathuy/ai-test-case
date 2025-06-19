@@ -21,11 +21,9 @@
 	});
 
 	async function handleNext() {
-		if (!checklist.length) {
-			const params = { userStory, acceptanceCriteria };
-			const checklist = await $mutation.mutateAsync(params);
-			createTestCaseStore.updateStep2({ checklist });
-		}
+		const params = { userStory, acceptanceCriteria };
+		const checklist = await $mutation.mutateAsync(params);
+		createTestCaseStore.updateStep2({ checklist });
 
 		goto(route('/create-test-case/step-2'));
 	}
@@ -43,6 +41,8 @@
 		{/snippet}
 	</StepIndicator>
 
+	<ButtonSuggest />
+
 	<LabelSection label="User story">
 		<InputArea bind:value={userStory} placeholder="Enter description" class="h-14" />
 	</LabelSection>
@@ -50,6 +50,4 @@
 	<LabelSection label="Acceptance criteria">
 		<InputArea bind:value={acceptanceCriteria} placeholder="Enter description" class="h-48" />
 	</LabelSection>
-
-	<ButtonSuggest />
 </ContainerStep>

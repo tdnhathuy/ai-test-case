@@ -1,3 +1,4 @@
+import { type Routes } from '@/lib/ROUTES';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { handle as handleAuth } from './auth';
@@ -12,8 +13,16 @@ const ignoreChromeDevTools: Handle = async ({ event, resolve }) => {
 const authorizationHandle: Handle = async ({ event, resolve }) => {
 	const session = await event.locals.auth();
 
-	if (!session?.user) {
-		throw redirect(303, '/auth');
+	if (event.route.id === '/') {
+		if (session) {
+			const home: Routes = '/home';
+			return redirect(303, home);
+		}
+
+		const publicRoutes: Routes[] = ['/auth', '/signin', '/signout', '/'];
+		if (publicRoutes.includes(event.route.id)) {
+			return redirect(303, publicRoutes[0]);
+		}
 	}
 
 	return resolve(event);

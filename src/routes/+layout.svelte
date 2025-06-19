@@ -1,6 +1,6 @@
 <script lang="ts">
-	import '../app.css';
 	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import '../app.css';
 
 	let { children } = $props();
 
@@ -8,12 +8,14 @@
 		defaultOptions: {
 			queries: {
 				staleTime: 5 * 60 * 1000,
-				refetchOnWindowFocus: false,
-			},
-		},
+				refetchOnWindowFocus: false
+			}
+		}
 	});
 </script>
 
 <QueryClientProvider client={queryClient}>
-	{@render children()}
+	<main class="flex flex-1">
+		{@render children?.()}
+	</main>
 </QueryClientProvider>

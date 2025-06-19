@@ -27,24 +27,25 @@ const defaultData: CreateTestCaseData = {
 };
 
 function createTestCaseStoreFactory() {
-	const { subscribe, set, update } = writable<CreateTestCaseData>(defaultData);
+	const methods = writable<CreateTestCaseData>(defaultData);
 
 	return {
-		subscribe,
-		// Reset store
-		reset: () => set(defaultData),
-		// Update step 1 data
+		...methods,
+		reset: () => methods.set(defaultData),
+		toggleChecklistItem: (id: string) =>
+			methods.update((state) => {
+				const checklist = state.step2.checklist.map((c) =>
+					c.id === id ? { ...c, checked: !c.checked } : c
+				);
+				return { ...state, step2: { ...state.step2, checklist } };
+			}),
+
 		updateStep1: (data: CreateTestCaseData['step1']) =>
-			update((store) => ({ ...store, step1: { ...store.step1, ...data } })),
-		// Update step 2 data
+			methods.update((store) => ({ ...store, step1: { ...store.step1, ...data } })),
 		updateStep2: (data: CreateTestCaseData['step2']) =>
-			update((store) => ({ ...store, step2: { ...store.step2, ...data } })),
-		// Update step 3 data
+			methods.update((store) => ({ ...store, step2: { ...store.step2, ...data } })),
 		updateStep3: (data: CreateTestCaseData['step3']) =>
-			update((store) => ({ ...store, step3: { ...store.step3, ...data } })),
-		// Get all data
-		set,
-		update
+			methods.update((store) => ({ ...store, step3: { ...store.step3, ...data } }))
 	};
 }
 
