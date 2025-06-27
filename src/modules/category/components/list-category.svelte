@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { Category, ChildCategory } from '@/lib/common/types/app.type';
 	import Icon from '@/lib/components/svelte/icon.svelte';
+	import { Dialog, DialogTrigger } from '@/lib/components/ui/dialog';
 	import ScrollArea from '@/lib/components/ui/scroll-area/scroll-area.svelte';
 	import { cn } from '@/lib/utils';
+	import CategoryDialog from './category.dialog.svelte';
 
 	let { categories, title }: { categories: Category[]; title: string } = $props();
 </script>
@@ -10,15 +12,21 @@
 {#snippet categoryItem(category: Category | ChildCategory, isChild: boolean = false)}
 	{@const iconSize = isChild ? 'md' : 'lg'}
 
-	<span
-		class={cn(
-			'flex cursor-pointer items-center gap-4 p-2 px-4 transition-all',
-			'hover:bg-accent hover:rounded-md'
-		)}
-	>
-		<Icon url={category.icon} size={iconSize} />
-		<span class="text-md font-semibold">{category.name}</span>
-	</span>
+	<Dialog>
+		<DialogTrigger>
+			<span
+				class={cn(
+					'flex cursor-pointer items-center gap-4 p-2 px-4 transition-all',
+					'hover:bg-accent hover:rounded-md'
+				)}
+			>
+				<Icon url={category.icon} size={iconSize} />
+				<span class="text-md font-semibold">{category.name}</span>
+			</span>
+		</DialogTrigger>
+
+		<CategoryDialog {category} />
+	</Dialog>
 {/snippet}
 
 <div class="flex flex-1 flex-col gap-2 p-4">

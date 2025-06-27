@@ -46,8 +46,8 @@ importers:
         specifier: ^3.8.1
         version: 3.8.1
       '@lucide/svelte':
-        specifier: ^0.513.0
-        version: 0.513.0(svelte@5.32.1)
+        specifier: ^0.515.0
+        version: 0.515.0(svelte@5.32.1)
       '@sveltejs/adapter-vercel':
         specifier: ^5.6.3
         version: 5.7.2(@sveltejs/kit@2.21.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.32.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)))(svelte@5.32.1)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)))(rollup@4.41.0)
@@ -364,8 +364,8 @@ packages:
     resolution: {integrity: sha512-2v75bu2vJB0xf7+qSAu0xcUyCYqzc7KeRE1RcKSpOGQTV9UpCqCs/xCsFWLUGnZRWb1VU6XYf+l6GJsDUW9pRQ==}
     engines: {node: ^16.14 || >=18}
 
-  '@lucide/svelte@0.513.0':
-    resolution: {integrity: sha512-XwBQMQkMlr9qp9yVg+epx5MzhBBrqul8atO00y/ZfhlKRJuQZVmq3ELibApqyBtj9ys0Ai4FH/SZcODTUFYXig==}
+  '@lucide/svelte@0.515.0':
+    resolution: {integrity: sha512-CEAyqcZmNBfYzVgaRmK2RFJP5tnbXxekRyDk0XX/eZQRfsJmkDvmQwXNX8C869BgNeryzmrRyjHhUL6g9ZOHNA==}
     peerDependencies:
       svelte: ^5
 
@@ -2061,7 +2061,7 @@ snapshots:
       recast: 0.23.11
       svelte: 5.32.1
 
-  '@lucide/svelte@0.513.0(svelte@5.32.1)':
+  '@lucide/svelte@0.515.0(svelte@5.32.1)':
     dependencies:
       svelte: 5.32.1
 
