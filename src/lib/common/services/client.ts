@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browser } from '$app/environment';
-import { getCachedAuthToken } from '@/lib/helpers/auth.helper';
+import { getCachedAuthToken } from '@/lib/common/helpers/auth.helper';
 
 export const client = axios.create();
 

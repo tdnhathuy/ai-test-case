@@ -1,6 +1,6 @@
-import { AIModel } from '@/lib/helpers/ai-model.helper';
-import { responseSuccess } from '@/lib/helpers/api.helper';
-import { buildChecklistPrompt } from '@/lib/helpers/promp.helper';
+import { AIModel } from '@/lib/common/helpers/ai-model.helper';
+import { responseSuccess } from '@/lib/common/helpers/api.helper';
+import { buildChecklistPrompt } from '@/lib/common/helpers/promp.helper';
 import { schemaChecklist, type ChecklistItem } from '@/lib/types/app.type';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';

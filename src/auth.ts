@@ -1,4 +1,4 @@
-import { configCallbacks, configSession, ProviderGoogle } from '@/lib/configs/auth.config';
+import { configCallbacks, configSession, ProviderGoogle } from '@/lib/common/configs/auth.config';
 import { SvelteKitAuth } from '@auth/sveltekit';
 
 export const { handle, signIn, signOut } = SvelteKitAuth({

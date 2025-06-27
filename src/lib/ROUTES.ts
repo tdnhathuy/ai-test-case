@@ -10,11 +10,13 @@
  */
 const PAGES = {
   "/": `/`,
+  "/category": `/category`,
   "/create-test-case": `/create-test-case`,
   "/create-test-case/step-1": `/create-test-case/step-1`,
   "/create-test-case/step-2": `/create-test-case/step-2`,
   "/create-test-case/step-3": `/create-test-case/step-3`,
   "/home": `/home`,
+  "/transaction": `/transaction`,
   "/auth": `/auth`
 }
 
@@ -25,7 +27,8 @@ const SERVERS = {
   "GET /api/auth/session": `/api/auth/session`,
   "GET /api/auth/verify-token": `/api/auth/verify-token`,
   "POST /api/checklist": `/api/checklist`,
-  "POST /api/testcase": `/api/testcase`
+  "GET /api/profile/category": `/api/profile/category`,
+  "GET /api/profile/setup": `/api/profile/setup`
 }
 
 /**
@@ -148,8 +151,8 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/auth': never }
-  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'POST /api/checklist': never, 'POST /api/testcase': never }
+  PAGES: { '/': never, '/category': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/transaction': never, '/auth': never }
+  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'POST /api/checklist': never, 'GET /api/profile/category': never, 'GET /api/profile/setup': never }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>
   Params: Record<string, never>

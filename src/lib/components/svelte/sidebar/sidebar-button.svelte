@@ -15,7 +15,8 @@
 	const isCollapsed = $derived(sidebar.state === 'collapsed');
 </script>
 
-<ButtonBase size="icon" class="w-full" {onclick} {...restProps}>
+<ButtonBase size="icon" class="h-12 w-full justify-start px-6" {onclick} {...restProps}>
 	<Icon />
+
 	<span class={cn(isCollapsed && 'sr-only')}>{label}</span>
 </ButtonBase>
