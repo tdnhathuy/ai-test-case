@@ -1,10 +1,5 @@
 <script lang="ts">
-	import type { PageProps } from './+page';
-
-	let { data }: { data: PageProps } = $props();
-	console.log('data', data);
+	import CategoryPage from '@/modules/category/pages/category.page.svelte';
 </script>
 
-<h1>Category</h1>
-
-<pre>{JSON.stringify(data.category, null, 2)}</pre>
+<CategoryPage />

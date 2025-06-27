@@ -108,5 +108,49 @@ export const DEFAULT_CATEGORY: ICategory[] = [
 				icon: EmptyIcon._id ?? ''
 			}
 		]
+	},
+	{
+		_id: genMongoId(),
+		name: 'Giải trí',
+		icon: EmptyIcon._id ?? '',
+		children: [
+			{
+				_id: genMongoId(),
+				name: 'Game',
+				icon: EmptyIcon._id ?? ''
+			},
+			{
+				_id: genMongoId(),
+				name: 'Phim',
+				icon: EmptyIcon._id ?? ''
+			}
+		]
+	},
+	{
+		_id: genMongoId(),
+		name: 'Hoá đơn',
+		icon: EmptyIcon._id ?? '',
+		children: [
+			{
+				_id: genMongoId(),
+				name: 'Điện',
+				icon: EmptyIcon._id ?? ''
+			},
+			{
+				_id: genMongoId(),
+				name: 'Phí Quản lý',
+				icon: EmptyIcon._id ?? ''
+			},
+			{
+				_id: genMongoId(),
+				name: 'Internet',
+				icon: EmptyIcon._id ?? ''
+			},
+			{
+				_id: genMongoId(),
+				name: 'Thuê nhà',
+				icon: EmptyIcon._id ?? ''
+			}
+		]
 	}
 ];
