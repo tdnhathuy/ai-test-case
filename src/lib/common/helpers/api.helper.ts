@@ -3,7 +3,7 @@ import { json } from '@sveltejs/kit';
 export const responseSuccess = <T>(data: T) => {
 	return json({
 		success: true,
-		data: data
+		...data
 	});
 };
 

@@ -1,4 +1,9 @@
+import type { Session } from '@auth/sveltekit';
 import { z } from 'zod/v4';
+
+export interface BasePageProps {
+	session: Session | null;
+}
 
 const zodBaseCategory = z.object({
 	id: z.string(),

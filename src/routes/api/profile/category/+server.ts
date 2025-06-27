@@ -1,6 +1,7 @@
 import { responseError, responseSuccess } from '@/lib/common/helpers/api.helper';
 import { ProfileModel } from '@/lib/common/zod/profile.zod';
 import type { RequestHandler } from './$types';
+import { DTOCategory } from '@/server/dto/category.dto';
 
 export const GET: RequestHandler = async ({ locals }) => {
 	const info = await locals.auth();
@@ -12,7 +13,11 @@ export const GET: RequestHandler = async ({ locals }) => {
 
 	const profile = await ProfileModel.findOne({ email: user.email });
 
+	if (!profile) {
+		return responseError('Profile not found', 'PROFILE_NOT_FOUND');
+	}
+
 	return responseSuccess({
-		category: profile?.category || []
+		data: profile.category.map((category) => DTOCategory.fromModel(profile, category))
 	});
 };
