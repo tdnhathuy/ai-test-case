@@ -1,3 +1,4 @@
+import { EnumIconType, type IIconCode } from '@/lib/common/enum/collection.enum';
 import { genMongoId } from '@/lib/common/helpers/func.helper';
 import type { IIcon } from '@/lib/common/zod/profile.zod';
 
@@ -7,8 +8,6 @@ const EmptyIcon: IIcon = {
 	code: 'Empty',
 	type: 'Default'
 };
-
-export const DEFAULT_ICON: IIcon[] = [EmptyIcon];
 
 const createParent = (name: string, children: string[]) => {
 	const parentId = genMongoId();
@@ -43,4 +42,21 @@ export const createDefaultCategory = () => {
 		...parentEntertainment,
 		...parentBill
 	];
+};
+
+const createIcon = (code: IIconCode, url: string): IIcon => {
+	return {
+		_id: genMongoId(),
+		url,
+		type: 'Default',
+		code
+	};
+};
+export const createDefaultIcon = (): IIcon[] => {
+	const arr = [
+		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/1656/1656937.png'),
+		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/1683/1683726.png'),
+		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/3514/3514407.png'),
+	];
+	return [EmptyIcon, ...arr];
 };

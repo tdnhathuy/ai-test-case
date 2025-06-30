@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Header } from '$lib/components/ui/sidebar/index.js';
 	import { ServiceCategory } from '@/lib/common/services/category.service';
+	import { ServiceIcon } from '@/lib/common/services/icon.service';
 	import { ServiceProfile } from '@/lib/common/services/profile.service';
 	import SidebarButton from '@/lib/components/svelte/sidebar/sidebar-button.svelte';
 	import { route } from '@/lib/ROUTES';
@@ -33,6 +34,14 @@
 		label="Get category"
 		onclick={async () => {
 			await ServiceCategory.getCategory();
+		}}
+	/>
+
+	<SidebarButton
+		icon={User}
+		label="Get Icon"
+		onclick={async () => {
+			await ServiceIcon.getIcon();
 		}}
 	/>
 </Header>

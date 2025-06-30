@@ -27,14 +27,22 @@ const zodTransaction = z.object({
 	description: z.string()
 });
 
+const zodIcon = z.object({
+	id: z.string(),
+	url: z.string(),
+	code: z.string()
+});
+
 const zodProfile = z.object({
 	id: z.string(),
 	email: z.string(),
 	category: z.array(zodCategory),
-	transaction: z.array(zodTransaction)
+	transaction: z.array(zodTransaction),
+	icon: z.array(zodIcon)
 });
 
 export type Profile = z.infer<typeof zodProfile>;
 export type Category = z.infer<typeof zodCategory>;
 export type ChildCategory = z.infer<typeof zodChildCategory>;
 export type Transaction = z.infer<typeof zodTransaction>;
+export type Icon = z.infer<typeof zodIcon>;

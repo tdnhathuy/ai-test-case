@@ -1,4 +1,7 @@
-import { createDefaultCategory, DEFAULT_ICON } from '@/lib/common/configs/default-values.config';
+import {
+	createDefaultCategory,
+	createDefaultIcon
+} from '@/lib/common/configs/default-values.config';
 import { genMongoId } from '@/lib/common/helpers/func.helper';
 import { ProfileModel, type IProfile } from '@/lib/common/zod/profile.zod';
 
@@ -11,7 +14,7 @@ export const createNewProfile = async (email: string) => {
 		_id: genMongoId(),
 		email,
 		category: createDefaultCategory(),
-		icon: DEFAULT_ICON,
+		icon: createDefaultIcon(),
 		transaction: []
 	};
 

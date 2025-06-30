@@ -5,12 +5,13 @@ export enum EnumCollection {
 export type ICollection = keyof typeof EnumCollection;
 
 export enum EnumIconCode {
-	Empty = 'Empty'
+	Empty = 'Empty',
+	Default = 'Default'
 }
 export type IIconCode = keyof typeof EnumIconCode;
 
 export enum EnumIconType {
-	Default = 'default',
-	Custom = 'custom'
+	Default = 'Default',
+	Custom = 'Custom'
 }
 export type IIconType = keyof typeof EnumIconType;
