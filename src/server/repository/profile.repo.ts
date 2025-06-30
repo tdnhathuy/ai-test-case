@@ -2,7 +2,7 @@ import {
 	createDefaultCategory,
 	createDefaultIcon
 } from '@/lib/common/configs/default-values.config';
-import { genMongoId } from '@/lib/common/helpers/func.helper';
+import { genMongoId } from '@/lib/common/helpers/';
 import { ProfileModel, type IProfile } from '@/lib/common/zod/profile.zod';
 
 export const getProfileByEmail = async (email: string) => {

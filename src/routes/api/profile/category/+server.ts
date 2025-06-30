@@ -1,7 +1,7 @@
-import { responseError, responseSuccess } from '@/lib/common/helpers/api.helper';
+import { responseError, responseSuccess } from '@/lib/common/helpers';
 import { ProfileModel } from '@/lib/common/zod/profile.zod';
 import type { RequestHandler } from './$types';
-import { DTOCategory } from '@/server/dto/category.dto';
+import { DTOCategory } from '@/server/dto';
 
 export const GET: RequestHandler = async ({ locals }) => {
 	const info = await locals.auth();
@@ -18,6 +18,6 @@ export const GET: RequestHandler = async ({ locals }) => {
 	}
 
 	return responseSuccess({
-		data: DTOCategory.fromModel(profile)
+		data: DTOCategory.fromProfile(profile)
 	});
 };

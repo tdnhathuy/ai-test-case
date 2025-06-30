@@ -2,7 +2,7 @@ import type { Category } from '@/lib/common/types/app.type';
 import type { IProfile } from '@/lib/common/zod/profile.zod';
 
 export const DTOCategory = {
-	fromModel: (profile: IProfile): Category[] => {
+	fromProfile: (profile: IProfile): Category[] => {
 		const allCategories = profile.category || [];
 		const allChildren = allCategories.filter((c) => c.parentId);
 

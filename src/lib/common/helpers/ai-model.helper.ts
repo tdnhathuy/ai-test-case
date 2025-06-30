@@ -1,11 +1,11 @@
-import { AI_KEY } from '$env/static/private';
+import { PUBLIC_AI_KEY } from '$env/static/public';
 import {
 	GoogleGenAI,
 	type GenerateContentConfig,
 	type GenerateContentParameters
 } from '@google/genai';
 
-const genAI = new GoogleGenAI({ apiKey: AI_KEY });
+const genAI = new GoogleGenAI({ apiKey: PUBLIC_AI_KEY });
 
 export class AIModel {
 	private static instance: AIModel;

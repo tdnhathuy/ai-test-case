@@ -1,5 +1,5 @@
-import { EnumIconType, type IIconCode } from '@/lib/common/enum/collection.enum';
-import { genMongoId } from '@/lib/common/helpers/func.helper';
+import { type IIconCode } from '@/lib/common/enum/collection.enum';
+import { genMongoId } from '@/lib/common/helpers';
 import type { IIcon } from '@/lib/common/zod/profile.zod';
 
 const EmptyIcon: IIcon = {
@@ -56,7 +56,7 @@ export const createDefaultIcon = (): IIcon[] => {
 	const arr = [
 		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/1656/1656937.png'),
 		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/1683/1683726.png'),
-		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/3514/3514407.png'),
+		createIcon('Default', 'https://cdn-icons-png.flaticon.com/512/3514/3514407.png')
 	];
 	return [EmptyIcon, ...arr];
 };

@@ -1,6 +1,6 @@
-import { responseError, responseSuccess } from '@/lib/common/helpers/api.helper';
+import { responseError, responseSuccess } from '@/lib/common/helpers';
 import { ProfileModel } from '@/lib/common/zod/profile.zod';
-import { DTOIcon } from '@/server/dto/icon.dto';
+import { DTOIcon } from '@/server/dto';
 
 export const GET = async ({ locals }) => {
 	const info = await locals.auth();

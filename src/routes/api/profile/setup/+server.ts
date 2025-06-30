@@ -1,7 +1,7 @@
-import { responseError, responseSuccess } from '@/lib/common/helpers/api.helper';
+import { responseError, responseSuccess } from '@/lib/common/helpers';
 import { connectMongo } from '@/lib/common/server/mongoose';
 import { ProfileModel } from '@/lib/common/zod/profile.zod';
-import { DTOProfile } from '@/server/dto/profile.dto';
+import { DTOProfile } from '@/server/dto';
 import { createNewProfile, getProfileByEmail } from '@/server/repository/profile.repo';
 import type { RequestHandler } from './$types';
 
