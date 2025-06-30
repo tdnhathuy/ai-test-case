@@ -1,31 +1,27 @@
 <script lang="ts">
-	import {
-		DialogHeader,
-		DialogTitle,
-		DialogDescription,
-		DialogContent,
-		DialogFooter
-	} from '@/lib/components/ui/dialog';
-	import Stack from '@/lib/components/svelte/stack.svelte';
-	import Icon from '@/lib/components/svelte/icon.svelte';
+	import { QueryKeys } from '@/lib/common/constant/key.const';
+	import { ServiceCategory } from '@/lib/common/services/category.service';
 	import type { Category, ChildCategory } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
+	import Icon from '@/lib/components/svelte/icon.svelte';
+	import LabelSection from '@/lib/components/svelte/label-section.svelte';
+	import Stack from '@/lib/components/svelte/stack.svelte';
+	import {
+		DialogContent,
+		DialogDescription,
+		DialogFooter,
+		DialogHeader,
+		DialogTitle
+	} from '@/lib/components/ui/dialog';
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
-	import LabelSection from '@/lib/components/svelte/label-section.svelte';
-	import { route } from '@/lib/ROUTES';
-	import { api } from '@/lib/common/services/api';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
-
 	const queryClient = useQueryClient();
 
 	const mutation = createMutation({
-		mutationFn: async (payload: { name: string }) => {
-			const url = route('PATCH /api/profile/category/[id]', { id: category.id });
-			await api.patch(url, payload);
-		},
+		mutationFn: ServiceCategory.updateCategory,
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: ['category'] });
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getCategory] });
 			hiddenCloseBtn?.click();
 		}
 	});
@@ -36,8 +32,7 @@
 	let hiddenCloseBtn: HTMLButtonElement | null = $state(null);
 
 	const onPressSave = async () => {
-		const payload = { name };
-		$mutation.mutateAsync(payload);
+		await $mutation.mutateAsync({ name, idCategory: category.id });
 	};
 </script>
 
