@@ -1,3 +1,4 @@
 export const QueryKeys = {
-	getCategory: 'getCategory'
+	getCategory: 'getCategory',
+	getIcon: 'getIcon'
 };

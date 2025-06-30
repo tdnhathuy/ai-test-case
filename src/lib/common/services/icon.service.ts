@@ -1,4 +1,4 @@
-import type Icon from '@/lib/components/svelte/icon.svelte';
+import type { Icon } from '@/lib/common/types/app.type';
 import { api } from './api';
 
 export const ServiceIcon = {

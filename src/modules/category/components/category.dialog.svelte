@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { QueryKeys } from '@/lib/common/constant/key.const';
 	import { ServiceCategory } from '@/lib/common/services/category.service';
-	import type { Category, ChildCategory } from '@/lib/common/types/app.type';
+	import type { Category, ChildCategory, Icon as IconType } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
 	import Icon from '@/lib/components/svelte/icon.svelte';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
@@ -15,6 +15,9 @@
 	} from '@/lib/components/ui/dialog';
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
+	import { Popover } from '@/lib/components/ui/popover';
+	import PopoverTrigger from '@/lib/components/ui/popover/popover-trigger.svelte';
+	import IconSelectPopover from './icon-select.popover.svelte';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	const queryClient = useQueryClient();
 
@@ -26,13 +29,20 @@
 		}
 	});
 
-	let { category }: { category: Category | ChildCategory } = $props();
+	let props: { category: Category | ChildCategory } = $props();
+	let iconSelected = $state<IconType | undefined>(undefined);
 
-	let name = $state(category.name);
+	let category = $state(props.category);
+
 	let hiddenCloseBtn: HTMLButtonElement | null = $state(null);
 
 	const onPressSave = async () => {
-		await $mutation.mutateAsync({ name, idCategory: category.id });
+		console.log('category', category);
+		await $mutation.mutateAsync({
+			name: category.name,
+			idCategory: category.id,
+			...(iconSelected ? { icon: iconSelected.id } : {})
+		});
 	};
 </script>
 
@@ -43,12 +53,19 @@
 
 	<DialogDescription>
 		<Stack class=" flex flex-col items-center gap-4">
-			<button class=" cursor-pointer">
-				<Icon url={category.icon} size={'lg'} />
-			</button>
+			<Popover>
+				<PopoverTrigger>
+					<Icon url={iconSelected?.url || category.icon} size={'lg'} />
+				</PopoverTrigger>
+				<IconSelectPopover
+					onSelect={(icon) => {
+						iconSelected = icon;
+					}}
+				/>
+			</Popover>
 
 			<LabelSection label="Tên danh mục" class="w-full">
-				<Input type="text" placeholder="Tên danh mục" class="w-full" bind:value={name} />
+				<Input type="text" placeholder="Tên danh mục" class="w-full" bind:value={category.name} />
 			</LabelSection>
 		</Stack>
 	</DialogDescription>
