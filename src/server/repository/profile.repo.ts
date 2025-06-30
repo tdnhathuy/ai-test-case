@@ -1,4 +1,4 @@
-import { DEFAULT_CATEGORY, DEFAULT_ICON } from '@/lib/common/configs/default-values.config';
+import { createDefaultCategory, DEFAULT_ICON } from '@/lib/common/configs/default-values.config';
 import { genMongoId } from '@/lib/common/helpers/func.helper';
 import { ProfileModel, type IProfile } from '@/lib/common/zod/profile.zod';
 
@@ -7,12 +7,10 @@ export const getProfileByEmail = async (email: string) => {
 };
 
 export const createNewProfile = async (email: string) => {
-	console.log('DEFAULT_CATEGORY', DEFAULT_CATEGORY);
-
 	const newProfile: IProfile = {
 		_id: genMongoId(),
 		email,
-		category: DEFAULT_CATEGORY,
+		category: createDefaultCategory(),
 		icon: DEFAULT_ICON,
 		transaction: []
 	};

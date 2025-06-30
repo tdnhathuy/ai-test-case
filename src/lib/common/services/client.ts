@@ -1,7 +1,6 @@
-import axios from 'axios';
 import { browser } from '$app/environment';
 import { getCachedAuthToken } from '@/lib/common/helpers/auth.helper';
-import { route, type KIT_ROUTES } from '@/lib/ROUTES';
+import axios from 'axios';
 
 export const client = axios.create({ baseURL: 'http://localhost:3000' });
 
@@ -15,13 +14,5 @@ client.interceptors.request.use(async (config) => {
 		}
 	}
 
-	console.log('config', config);
 	return config;
 });
-
-export const api = {
-	get: async <T>(url: keyof KIT_ROUTES['SERVERS']) => {
-		const response = await client.get<{ data: T }>(route(url));
-		return response.data.data;
-	}
-};

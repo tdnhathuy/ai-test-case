@@ -13,14 +13,31 @@
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
+	import { route } from '@/lib/ROUTES';
+	import { api } from '@/lib/common/services/api';
+	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
+
+	const queryClient = useQueryClient();
+
+	const mutation = createMutation({
+		mutationFn: async (payload: { name: string }) => {
+			const url = route('PATCH /api/profile/category/[id]', { id: category.id });
+			await api.patch(url, payload);
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries({ queryKey: ['category'] });
+			hiddenCloseBtn?.click();
+		}
+	});
 
 	let { category }: { category: Category | ChildCategory } = $props();
 
 	let name = $state(category.name);
+	let hiddenCloseBtn: HTMLButtonElement | null = $state(null);
 
-	const onPressSave = () => {
-		console.log('save');
-		console.log('name', name);
+	const onPressSave = async () => {
+		const payload = { name };
+		$mutation.mutateAsync(payload);
 	};
 </script>
 
@@ -46,6 +63,8 @@
 			<ButtonBase variant="outline">Huỷ</ButtonBase>
 		</DialogClose>
 
-		<ButtonBase onclick={onPressSave}>Lưu</ButtonBase>
+		<DialogClose bind:ref={hiddenCloseBtn} class="hidden" />
+
+		<ButtonBase onclick={onPressSave} loading={$mutation.isPending}>Lưu</ButtonBase>
 	</DialogFooter>
 </DialogContent>

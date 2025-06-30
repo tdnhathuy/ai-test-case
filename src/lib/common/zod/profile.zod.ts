@@ -23,19 +23,11 @@ const zodIcon = z.object({
 	type: z.enum(Object.keys(EnumIconType) as [IIconType, ...IIconType[]])
 });
 
-const zodBaseCategory = z.object({
+const zodCategory = z.object({
 	_id: zodIdCommon,
 	icon: iconId,
-	name: z.string()
-});
-
-const zodChildCategory = z.object({
-	...zodBaseCategory.shape
-});
-
-const zodCategory = z.object({
-	...zodBaseCategory.shape,
-	children: z.array(zodChildCategory).default([])
+	name: z.string(),
+	parentId: z.string().optional()
 });
 
 const zodTransaction = z.object({
@@ -77,4 +69,3 @@ export type IProfileModel = Model<HydratedDocument<IProfile>>;
 export type IIcon = z.infer<typeof zodIcon>;
 export type ITransaction = z.infer<typeof zodTransaction>;
 export type ICategory = z.infer<typeof zodCategory>;
-export type IChildCategory = z.infer<typeof zodChildCategory>;

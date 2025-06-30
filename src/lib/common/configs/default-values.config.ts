@@ -1,5 +1,5 @@
 import { genMongoId } from '@/lib/common/helpers/func.helper';
-import type { ICategory, IIcon } from '@/lib/common/zod/profile.zod';
+import type { IIcon } from '@/lib/common/zod/profile.zod';
 
 const EmptyIcon: IIcon = {
 	_id: genMongoId(),
@@ -10,147 +10,37 @@ const EmptyIcon: IIcon = {
 
 export const DEFAULT_ICON: IIcon[] = [EmptyIcon];
 
-export const DEFAULT_CATEGORY: ICategory[] = [
-	{
-		_id: genMongoId(),
-		name: 'Ăn uống',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Ăn',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Chợ',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Cà phê',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Nhà hàng',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Party',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	},
-	{
-		_id: genMongoId(),
-		name: 'Xe',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Xăng xe',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Bảo dưỡng',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Xe Khách',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Grab',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	},
-	{
-		_id: genMongoId(),
-		name: 'Mua sắm',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Lặt vặt',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Đồ gia dụng',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	},
-	{
-		_id: genMongoId(),
-		name: 'Làm đẹp',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Cắt tóc',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Mỹ phẩm',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Outfit',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	},
-	{
-		_id: genMongoId(),
-		name: 'Giải trí',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Game',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Phim',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	},
-	{
-		_id: genMongoId(),
-		name: 'Hoá đơn',
-		icon: EmptyIcon._id ?? '',
-		children: [
-			{
-				_id: genMongoId(),
-				name: 'Điện',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Phí Quản lý',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Internet',
-				icon: EmptyIcon._id ?? ''
-			},
-			{
-				_id: genMongoId(),
-				name: 'Thuê nhà',
-				icon: EmptyIcon._id ?? ''
-			}
-		]
-	}
-];
+const createParent = (name: string, children: string[]) => {
+	const parentId = genMongoId();
+	return [
+		{
+			_id: parentId,
+			name,
+			icon: EmptyIcon._id ?? ''
+		},
+		...children.map((child) => ({
+			_id: genMongoId(),
+			name: child,
+			icon: EmptyIcon._id ?? '',
+			parentId
+		}))
+	];
+};
+
+export const createDefaultCategory = () => {
+	const parentFood = createParent('Ăn uống', ['Ăn', 'Chợ', 'Cà phê', 'Nhà hàng', 'Party']);
+	const parentCar = createParent('Xe', ['Xăng xe', 'Bảo dưỡng', 'Xe Khách', 'Grab']);
+	const parentShopping = createParent('Mua sắm', ['Lặt vặt', 'Đồ gia dụng']);
+	const parentBeauty = createParent('Làm đẹp', ['Cắt tóc', 'Mỹ phẩm', 'Outfit']);
+	const parentEntertainment = createParent('Giải trí', ['Game', 'Phim']);
+	const parentBill = createParent('Hoá đơn', ['Điện', 'Phí Quản lý', 'Internet', 'Thuê nhà']);
+
+	return [
+		...parentFood,
+		...parentCar,
+		...parentShopping,
+		...parentBeauty,
+		...parentEntertainment,
+		...parentBill
+	];
+};

@@ -18,6 +18,6 @@ export const GET: RequestHandler = async ({ locals }) => {
 	}
 
 	return responseSuccess({
-		data: profile.category.map((category) => DTOCategory.fromModel(profile, category))
+		data: DTOCategory.fromModel(profile)
 	});
 };

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { api } from '@/lib/common/services/client';
+	import { api } from '@/lib/common/services/api';
 	import type { Category } from '@/lib/common/types/app.type';
 	import ListCategory from '@/modules/category/components/list-category.svelte';
 	import { createQuery } from '@tanstack/svelte-query';
