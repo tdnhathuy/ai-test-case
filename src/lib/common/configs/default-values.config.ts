@@ -1,7 +1,7 @@
 import { type IIconCode } from '@/lib/common/enum/collection.enum';
 import { genMongoId } from '@/lib/common/helpers';
 import type { IIcon } from '@/lib/common/zod/profile.zod';
-
+import objectId from 'bson-objectid';
 const EmptyIcon: IIcon = {
 	_id: genMongoId(),
 	url: 'https://cdn-icons-png.flaticon.com/512/1376/1376786.png',

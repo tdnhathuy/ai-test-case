@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import objectId from 'bson-objectid';
 import { z } from 'zod/v4';
 
 export const createJsonSchema = (schema: z.ZodObject<any>) => {
@@ -7,6 +7,6 @@ export const createJsonSchema = (schema: z.ZodObject<any>) => {
 	return jsonSchema;
 };
 
-export const genMongoId = () => {
-	return new ObjectId();
+export const genMongoId = (): string => {
+	return objectId().toString();
 };

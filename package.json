@@ -49,6 +49,7 @@
 		"@tanstack/svelte-query": "^5.79.0",
 		"@zodyac/zod-mongoose": "^4.1.0",
 		"axios": "^1.9.0",
+		"bson-objectid": "^2.0.4",
 		"mongodb": "^6.17.0",
 		"mongoose": "^8.16.0",
 		"mongoose-lean-virtuals": "^2.0.0",
