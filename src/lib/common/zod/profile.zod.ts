@@ -39,11 +39,19 @@ const zodTransaction = z.object({
 	description: z.string().optional()
 });
 
+const zodWallet = z.object({
+	_id: zodIdCommon,
+	icon: iconId,
+	name: z.string(),
+	balance: z.number()
+});
+
 export const zodProfile = z.object({
 	_id: zodIdCommon,
 	email: z.string().email(),
 	category: z.array(zodCategory),
 	transaction: z.array(zodTransaction),
+	wallet: z.array(zodWallet),
 	icon: z.array(zodIcon)
 });
 

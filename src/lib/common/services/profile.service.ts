@@ -1,5 +1,5 @@
+import { api } from '@/lib/common/configs/api.config';
 import type { Profile } from '@/lib/common/types/app.type';
-import { api } from './api';
 
 export const ServiceProfile = {
 	getProfile: async () => {

@@ -1,5 +1,5 @@
+import { api } from '@/lib/common/configs/api.config';
 import type { Icon } from '@/lib/common/types/app.type';
-import { api } from './api';
 
 export const ServiceIcon = {
 	getIcon: async () => {

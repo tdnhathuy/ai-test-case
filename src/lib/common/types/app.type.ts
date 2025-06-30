@@ -33,6 +33,12 @@ const zodIcon = z.object({
 	code: z.string()
 });
 
+const zodWallet = z.object({
+	id: z.string(),
+	name: z.string(),
+	balance: z.number()
+});
+
 const zodProfile = z.object({
 	id: z.string(),
 	email: z.string(),
@@ -46,3 +52,4 @@ export type Category = z.infer<typeof zodCategory>;
 export type ChildCategory = z.infer<typeof zodChildCategory>;
 export type Transaction = z.infer<typeof zodTransaction>;
 export type Icon = z.infer<typeof zodIcon>;
+export type Wallet = z.infer<typeof zodWallet>;

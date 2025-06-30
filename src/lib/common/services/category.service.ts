@@ -1,5 +1,5 @@
+import { api } from '@/lib/common/configs/api.config';
 import type { Category } from '@/lib/common/types/app.type';
-import { api } from './api';
 import { route } from '@/lib/ROUTES';
 
 export const ServiceCategory = {

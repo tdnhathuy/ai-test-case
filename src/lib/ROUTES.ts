@@ -17,6 +17,7 @@ const PAGES = {
   "/create-test-case/step-3": `/create-test-case/step-3`,
   "/home": `/home`,
   "/transaction": `/transaction`,
+  "/wallet": `/wallet`,
   "/auth": `/auth`
 }
 
@@ -31,7 +32,8 @@ const SERVERS = {
     return `/api/profile/category/${params['id']}`
   },
   "GET /api/profile/icon": `/api/profile/icon`,
-  "GET /api/profile/setup": `/api/profile/setup`
+  "GET /api/profile/setup": `/api/profile/setup`,
+  "GET /api/profile/wallet": `/api/profile/wallet`
 }
 
 /**
@@ -154,8 +156,8 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/category': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/transaction': never, '/auth': never }
-  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'GET /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never }
+  PAGES: { '/': never, '/category': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/transaction': never, '/wallet': never, '/auth': never }
+  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'GET /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never, 'GET /api/profile/wallet': never }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>
   Params: { 'id': never }

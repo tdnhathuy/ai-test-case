@@ -15,7 +15,8 @@ export const createNewProfile = async (email: string) => {
 		email,
 		category: createDefaultCategory(),
 		icon: createDefaultIcon(),
-		transaction: []
+		transaction: [],
+		wallet: []
 	};
 
 	return await ProfileModel.create(newProfile);

@@ -1,9 +1,8 @@
+import { api } from '@/lib/common/configs/api.config';
 import { route } from '@/lib/ROUTES';
-import { client } from '@/lib/services/client';
 
 export const AuthService = {
 	verifyToken: async () => {
-		const response = await client.get(route('GET /api/auth/verify-token'));
-		return response.data;
+		return api.get(route('GET /api/auth/verify-token'));
 	}
 };
