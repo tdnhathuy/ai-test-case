@@ -36,7 +36,8 @@ const zodIcon = z.object({
 const zodWallet = z.object({
 	id: z.string(),
 	name: z.string(),
-	balance: z.number()
+	balance: z.number(),
+	icon: z.string()
 });
 
 const zodProfile = z.object({
@@ -44,7 +45,8 @@ const zodProfile = z.object({
 	email: z.string(),
 	category: z.array(zodCategory),
 	transaction: z.array(zodTransaction),
-	icon: z.array(zodIcon)
+	icon: z.array(zodIcon),
+	wallet: z.array(zodWallet).default([])
 });
 
 export type Profile = z.infer<typeof zodProfile>;

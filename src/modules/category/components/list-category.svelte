@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { Category, ChildCategory } from '@/lib/common/types/app.type';
-	import Icon from '@/lib/components/svelte/icon.svelte';
 	import { Dialog, DialogTrigger } from '@/lib/components/ui/dialog';
 	import ScrollArea from '@/lib/components/ui/scroll-area/scroll-area.svelte';
 	import { cn } from '@/lib/utils';
 	import CategoryDialog from './category.dialog.svelte';
+	import WiseIcon from '@/lib/components/wise/wise-icon.svelte';
 
 	let { categories, title }: { categories: Category[]; title: string } = $props();
 </script>
@@ -20,7 +20,7 @@
 					'hover:bg-accent hover:rounded-md'
 				)}
 			>
-				<Icon url={category.icon} size={iconSize} />
+				<WiseIcon url={category.icon} size={iconSize} />
 				<span class="text-md font-semibold">{category.name}</span>
 			</span>
 		</DialogTrigger>

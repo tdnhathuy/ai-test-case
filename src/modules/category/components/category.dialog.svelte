@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { QueryKeys } from '@/lib/common/constant/key.const';
+	import { genIconByUrl } from '@/lib/common/helpers';
 	import { ServiceCategory } from '@/lib/common/services/category.service';
-	import type { Category, ChildCategory, Icon as IconType } from '@/lib/common/types/app.type';
+	import type { Category, ChildCategory, Icon } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
-	import Icon from '@/lib/components/svelte/icon.svelte';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
 	import Stack from '@/lib/components/svelte/stack.svelte';
 	import {
@@ -15,9 +15,7 @@
 	} from '@/lib/components/ui/dialog';
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
-	import { Popover } from '@/lib/components/ui/popover';
-	import PopoverTrigger from '@/lib/components/ui/popover/popover-trigger.svelte';
-	import IconSelectPopover from './icon-select.popover.svelte';
+	import { WiseIconSelector } from '@/lib/components/wise';
 	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
 	const queryClient = useQueryClient();
 
@@ -25,23 +23,24 @@
 		mutationFn: ServiceCategory.updateCategory,
 		onSettled: () => {
 			queryClient.invalidateQueries({ queryKey: [QueryKeys.getCategory] });
-			hiddenCloseBtn?.click();
+			ref?.click();
 		}
 	});
 
-	let props: { category: Category | ChildCategory } = $props();
-	let iconSelected = $state<IconType | undefined>(undefined);
+	type Props = {
+		category: Category | ChildCategory;
+	};
 
-	let category = $state(props.category);
+	let { category }: Props = $props();
+	let icon = $state<Icon>(genIconByUrl(category.icon));
 
-	let hiddenCloseBtn: HTMLButtonElement | null = $state(null);
+	let ref: HTMLButtonElement | null = $state(null);
 
 	const onPressSave = async () => {
-		console.log('category', category);
 		await $mutation.mutateAsync({
 			name: category.name,
 			idCategory: category.id,
-			...(iconSelected ? { icon: iconSelected.id } : {})
+			...(icon ? { icon: icon.id } : {})
 		});
 	};
 </script>
@@ -53,16 +52,7 @@
 
 	<DialogDescription>
 		<Stack class=" flex flex-col items-center gap-4">
-			<Popover>
-				<PopoverTrigger>
-					<Icon url={iconSelected?.url || category.icon} size={'lg'} />
-				</PopoverTrigger>
-				<IconSelectPopover
-					onSelect={(icon) => {
-						iconSelected = icon;
-					}}
-				/>
-			</Popover>
+			<WiseIconSelector bind:icon />
 
 			<LabelSection label="Tên danh mục" class="w-full">
 				<Input type="text" placeholder="Tên danh mục" class="w-full" bind:value={category.name} />
@@ -75,8 +65,8 @@
 			<ButtonBase variant="outline">Huỷ</ButtonBase>
 		</DialogClose>
 
-		<DialogClose bind:ref={hiddenCloseBtn} class="hidden" />
-
 		<ButtonBase onclick={onPressSave} loading={$mutation.isPending}>Lưu</ButtonBase>
 	</DialogFooter>
+
+	<DialogClose bind:ref class="hidden" />
 </DialogContent>

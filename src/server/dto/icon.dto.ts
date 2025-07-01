@@ -8,5 +8,14 @@ export const DTOIcon = {
 			url: icon.url,
 			code: icon.code
 		}));
+	},
+
+	getIconById: (profile: IProfile, id: string): Icon => {
+		const icon = profile.icon.find((icon) => icon._id.toString() === id);
+		return {
+			id: icon?._id.toString() ?? '',
+			url: icon?.url ?? '',
+			code: icon?.code ?? ''
+		};
 	}
 };

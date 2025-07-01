@@ -11,7 +11,11 @@ export const GET: RequestHandler = async ({ locals }) => {
 		return responseError('User not found', 'USER_NOT_FOUND');
 	}
 
-	const profile = await ProfileModel.findOne({ email: user.email });
+	const email = user.email as string;
+
+	// Đảm bảo đã kết nối Mongo trước khi truy vấn
+
+	const profile = await ProfileModel.findOne({ email });
 
 	if (!profile) {
 		return responseError('Profile not found', 'PROFILE_NOT_FOUND');

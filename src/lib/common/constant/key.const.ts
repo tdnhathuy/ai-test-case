@@ -1,4 +1,9 @@
 export const QueryKeys = {
 	getCategory: 'getCategory',
-	getIcon: 'getIcon'
+	getIcon: 'getIcon',
+	getWallet: 'getWallet'
+};
+
+export const MutationKeys = {
+	createWallet: 'createWallet'
 };

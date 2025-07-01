@@ -1,11 +1,12 @@
 import { api } from '@/lib/common/configs/api.config';
 import type { Wallet } from '@/lib/common/types/app.type';
+import { route } from '@/lib/ROUTES';
 
 export const ServiceWallet = {
-	getWallet: async () => {
-		return api.get<Wallet>('GET /api/profile/wallet');
+	getWallet: () => {
+		return api.get<Wallet[]>('GET /api/profile/wallet');
 	},
-	createWallet: async (payload: PayloadCreateWallet) => {
+	createWallet: (payload: PayloadCreateWallet) => {
 		return api.post<Wallet>('POST /api/profile/wallet', payload);
 	}
 };
@@ -13,4 +14,5 @@ export const ServiceWallet = {
 export interface PayloadCreateWallet {
 	name: string;
 	balance: number;
+	icon: string;
 }
