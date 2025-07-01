@@ -1,6 +1,6 @@
-import type { Profile } from '@/lib/common/types/app.type';
-import type { IProfile } from '@/lib/common/zod/profile.zod';
-import { DTOCategory, DTOIcon, DTOTransaction } from '@/server/dto';
+import type { IProfile } from '@/lib/common/schema';
+import type { Profile } from '@/lib/common/types';
+import { DTOCategory, DTOIcon, DTOTransaction, DTOWallet } from '@/server/dto';
 
 export const DTOProfile = {
 	fromModel: (profile: IProfile): Profile => {
@@ -9,7 +9,8 @@ export const DTOProfile = {
 			id: profile._id.toString(),
 			icon: DTOIcon.fromProfile(profile),
 			category: DTOCategory.fromProfile(profile),
-			transaction: DTOTransaction.fromProfile(profile)
+			transaction: DTOTransaction.fromProfile(profile),
+			wallet: DTOWallet.fromProfile(profile)
 		};
 	}
 };

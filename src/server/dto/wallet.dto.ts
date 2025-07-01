@@ -1,5 +1,5 @@
+import type { IProfile } from '@/lib/common/schema';
 import type { Wallet } from '@/lib/common/types/app.type';
-import type { IProfile } from '@/lib/common/zod/profile.zod';
 import { DTOIcon } from '@/server/dto/icon.dto';
 
 export const DTOWallet = {
@@ -8,8 +8,11 @@ export const DTOWallet = {
 			return {
 				id: wallet._id.toString(),
 				name: wallet.name,
-				balance: wallet.balance,
-				icon: DTOIcon.getIconById(profile, wallet.icon.toString()).url
+				// balance: wallet.initBalance,
+				icon: DTOIcon.getIconById(profile, wallet.idIcon),
+				type: wallet.type,
+				idIcon: wallet.idIcon.toString(),
+				initBalance: wallet.initBalance
 			};
 		});
 	}

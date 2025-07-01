@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Category, ChildCategory } from '@/lib/common/types/app.type';
+	import type { Category } from '@/lib/common/types/app.type';
 	import { Dialog, DialogTrigger } from '@/lib/components/ui/dialog';
 	import ScrollArea from '@/lib/components/ui/scroll-area/scroll-area.svelte';
 	import { cn } from '@/lib/utils';
@@ -9,7 +9,7 @@
 	let { categories, title }: { categories: Category[]; title: string } = $props();
 </script>
 
-{#snippet categoryItem(category: Category | ChildCategory, isChild: boolean = false)}
+{#snippet categoryItem(category: Category, isChild: boolean = false)}
 	{@const iconSize = isChild ? 'md' : 'lg'}
 
 	<Dialog>
@@ -20,7 +20,7 @@
 					'hover:bg-accent hover:rounded-md'
 				)}
 			>
-				<WiseIcon url={category.icon} size={iconSize} />
+				<WiseIcon url={category.icon.url} size={iconSize} />
 				<span class="text-md font-semibold">{category.name}</span>
 			</span>
 		</DialogTrigger>
@@ -40,7 +40,7 @@
 						{@render categoryItem(category, false)}
 
 						<span class="ml-20 flex flex-col gap-2 divide-y">
-							{#each category.children as child}
+							{#each category.children || [] as child}
 								{@render categoryItem(child, true)}
 							{/each}
 						</span>

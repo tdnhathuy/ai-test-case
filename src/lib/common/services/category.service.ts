@@ -2,8 +2,6 @@ import { api } from '@/lib/common/configs/api.config';
 import type { Category } from '@/lib/common/types/app.type';
 import { route } from '@/lib/ROUTES';
 
-
-
 export const ServiceCategory = {
 	getCategory: () => api.get<Category[]>('GET /api/profile/category'),
 	updateCategory: async (payload: PayloadUpdateCategory) => {
@@ -13,6 +11,7 @@ export const ServiceCategory = {
 };
 
 export interface PayloadUpdateCategory {
-	idCategory: string;
 	name: string;
+	idCategory: string;
+	idIcon: string;
 }

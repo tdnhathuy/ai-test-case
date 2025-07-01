@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { QueryKeys } from '@/lib/common/constant/key.const';
-	import { genIconByUrl } from '@/lib/common/helpers';
-	import { ServiceCategory } from '@/lib/common/services/category.service';
-	import type { Category, ChildCategory, Icon } from '@/lib/common/types/app.type';
+	import type { PayloadUpdateCategory } from '@/lib/common/services/category.service';
+	import { useUpdateCategory } from '@/lib/common/services/mutations/app.muation';
+	import type { Category, Icon } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
 	import Stack from '@/lib/components/svelte/stack.svelte';
@@ -16,32 +16,32 @@
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
 	import { WiseIconSelector } from '@/lib/components/wise';
-	import { createMutation, useQueryClient } from '@tanstack/svelte-query';
+	import { useQueryClient } from '@tanstack/svelte-query';
 	const queryClient = useQueryClient();
 
-	const mutation = createMutation({
-		mutationFn: ServiceCategory.updateCategory,
-		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: [QueryKeys.getCategory] });
-			ref?.click();
-		}
-	});
+	const mutation = useUpdateCategory();
 
 	type Props = {
-		category: Category | ChildCategory;
+		category: Category;
 	};
 
 	let { category }: Props = $props();
-	let icon = $state<Icon>(genIconByUrl(category.icon));
+	let icon = $state<Icon>(category.icon);
 
 	let ref: HTMLButtonElement | null = $state(null);
 
 	const onPressSave = async () => {
-		await $mutation.mutateAsync({
+		const payload: PayloadUpdateCategory = {
 			name: category.name,
 			idCategory: category.id,
-			...(icon ? { icon: icon.id } : {})
-		});
+			idIcon: icon.id
+		};
+		await $mutation.mutateAsync(payload, { onSuccess });
+	};
+
+	const onSuccess = () => {
+		queryClient.invalidateQueries({ queryKey: [QueryKeys.getCategory] });
+		ref?.click();
 	};
 </script>
 

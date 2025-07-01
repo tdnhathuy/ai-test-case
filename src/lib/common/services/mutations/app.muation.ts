@@ -1,5 +1,5 @@
 import { MutationKeys } from '@/lib/common/constant/key.const';
-import { ServiceWallet } from '@/lib/common/services';
+import { ServiceCategory, ServiceWallet } from '@/lib/common/services';
 import { createMutation } from '@tanstack/svelte-query';
 
 export const useCreateWallet = () => {
@@ -8,3 +8,12 @@ export const useCreateWallet = () => {
 		mutationFn: ServiceWallet.createWallet
 	});
 };
+
+
+
+export const useUpdateCategory = () => {
+	return createMutation({
+		mutationKey: [MutationKeys.updateCategory],
+		mutationFn: ServiceCategory.updateCategory
+	});
+};	

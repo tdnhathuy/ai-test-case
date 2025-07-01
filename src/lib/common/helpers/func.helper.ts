@@ -1,21 +1,15 @@
-import type { Icon } from '@/lib/common/types/app.type';
+import type { IIcon } from '@/lib/common/schema/app.schema';
 import objectId from 'bson-objectid';
-import { z } from 'zod/v4';
-
-export const createJsonSchema = (schema: z.ZodObject<any>) => {
-	const jsonSchema = z.toJSONSchema(schema);
-	delete jsonSchema.$schema;
-	return jsonSchema;
-};
 
 export const genMongoId = (): string => {
 	return objectId().toString();
 };
 
-export const genIconByUrl = (url: string): Icon => {
+export const genIconByUrl = (url: string): IIcon => {
 	return {
-		code: '',
-		id: '',
+		_id: genMongoId(),
+		code: 'Default',
+		type: 'Default',
 		url
 	};
 };

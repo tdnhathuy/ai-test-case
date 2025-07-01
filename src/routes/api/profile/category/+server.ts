@@ -1,7 +1,7 @@
 import { responseError, responseSuccess } from '@/lib/common/helpers';
-import { ProfileModel } from '@/lib/common/zod/profile.zod';
-import type { RequestHandler } from './$types';
+import { ProfileModel } from '@/lib/common/schema/app.schema';
 import { DTOCategory } from '@/server/dto';
+import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ locals }) => {
 	const info = await locals.auth();
@@ -12,8 +12,6 @@ export const GET: RequestHandler = async ({ locals }) => {
 	}
 
 	const email = user.email as string;
-
-	// Đảm bảo đã kết nối Mongo trước khi truy vấn
 
 	const profile = await ProfileModel.findOne({ email });
 

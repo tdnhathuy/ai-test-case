@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import { Types } from 'mongoose';
-import { ProfileModel } from '@/lib/common/zod/profile.zod';
 import { responseError, responseSuccess } from '@/lib/common/helpers';
+import { ProfileModel } from '@/lib/common/schema/app.schema';
 
 export const PATCH: RequestHandler = async ({ locals, params, request }) => {
 	try {

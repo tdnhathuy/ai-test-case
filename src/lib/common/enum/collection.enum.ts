@@ -15,3 +15,18 @@ export enum EnumIconType {
 	Custom = 'Custom'
 }
 export type IIconType = keyof typeof EnumIconType;
+
+export enum EnumWalletType {
+	Cash = 'Cash',
+	Debit = 'Debit',
+	Credit = 'Credit',
+	Crypto = 'Crypto'
+}
+export type IWalletType = keyof typeof EnumWalletType;
+
+export enum EnumCategoryType {
+	Expense = 'Expense',
+	Income = 'Income',
+	Transfer = 'Transfer'
+}
+export type ICategoryType = keyof typeof EnumCategoryType;

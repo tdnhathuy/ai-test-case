@@ -4,8 +4,8 @@
 
 	import { ServiceIcon } from '@/lib/common/services';
 	import type { Icon } from '@/lib/common/types/app.type';
-	import { createQuery } from '@tanstack/svelte-query';
 	import { WiseIcon } from '@/lib/components/wise';
+	import { createQuery } from '@tanstack/svelte-query';
 
 	let ref: HTMLButtonElement | null = $state(null);
 

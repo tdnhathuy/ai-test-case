@@ -1,5 +1,5 @@
 import { responseError, responseSuccess } from '@/lib/common/helpers';
-import { ProfileModel } from '@/lib/common/zod/profile.zod';
+import { ProfileModel } from '@/lib/common/schema/app.schema';
 import { DTOIcon } from '@/server/dto';
 
 export const GET = async ({ locals }) => {
