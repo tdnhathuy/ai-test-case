@@ -6,10 +6,10 @@
 </script>
 
 <Sidebar.Provider>
-	<AppSidebar />
-	<main class="flex h-screen flex-1 flex-col overflow-hidden">
-		<div class="flex-1 overflow-auto p-4">
+	<main class="flex h-screen w-full overflow-hidden">
+		<AppSidebar />
+		<page class="flex h-screen w-full overflow-hidden p-4">
 			{@render children?.()}
-		</div>
+		</page>
 	</main>
 </Sidebar.Provider>

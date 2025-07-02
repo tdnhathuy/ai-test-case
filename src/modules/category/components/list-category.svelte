@@ -9,7 +9,7 @@
 	let { categories = [], title }: { categories?: Category[]; title: string } = $props();
 </script>
 
-<div class="flex h-full w-full flex-col gap-2">
+<div class="flex h-full w-full flex-col gap-2 pb-20">
 	<h2 class="text-2xl font-bold">{title}</h2>
 
 	<ScrollArea class="flex-1 overflow-hidden" orientation="vertical">

@@ -10,15 +10,16 @@
 	const expense = $derived($query.data?.filter((x) => x.type === 'Expense') ?? []);
 </script>
 
-<div class="flex h-full w-full flex-col gap-4">
-	<ButtonCreateCategory />
-
-	{#if $query.isLoading}
+{#if $query.isLoading}
+	<div class="flex h-full flex-1 justify-center">
 		<span>Loading...</span>
-	{:else}
+	</div>
+{:else}
+	<section class="flex h-full w-full flex-col gap-4">
+		<ButtonCreateCategory />
 		<div class="flex h-full flex-1 gap-4">
 			<ListCategory title="Thu" categories={income} />
 			<ListCategory title="Chi" categories={expense} />
 		</div>
-	{/if}
-</div>
+	</section>
+{/if}
