@@ -2,7 +2,7 @@
 	import { cn } from '@/lib/utils';
 
 	interface IconProps {
-		url: string;
+		url: string | null | undefined;
 		class?: string;
 		size?: 'sm' | 'md' | 'lg';
 		onclick?: () => void;
@@ -21,7 +21,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <img
 	draggable={false}
-	src={url}
+	src={url ?? ''}
 	alt=""
 	class={cn(sizeMap[size], onclick && 'cursor-pointer', className)}
 	{onclick}

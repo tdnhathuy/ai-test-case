@@ -7,7 +7,9 @@
 
 <Sidebar.Provider>
 	<AppSidebar />
-	<main class="flex flex-1">
-		{@render children?.()}
+	<main class="flex h-screen flex-1 flex-col overflow-hidden">
+		<div class="flex-1 overflow-auto p-4">
+			{@render children?.()}
+		</div>
 	</main>
 </Sidebar.Provider>

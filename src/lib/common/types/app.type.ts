@@ -16,9 +16,10 @@ export interface Profile {
 export interface Category {
 	id: string;
 	name: string;
-	icon: Icon;
+	icon: Icon | null;
 	children?: Category[];
 	type: ICategoryType;
+	idParent: string | null;
 }
 export interface Transaction {
 	id: string;

@@ -22,9 +22,11 @@ export const DTOCategory = {
 					id: child._id.toString(),
 					name: child.name,
 					icon: DTOIcon.getIconById(profile, child.idIcon),
-					type: child.type
+					type: child.type,
+					idParent: child.idParent?.toString() ?? null
 				})),
-				type: c.type
+				type: c.type,
+				idParent: c.idParent?.toString() ?? null
 			};
 		});
 	}

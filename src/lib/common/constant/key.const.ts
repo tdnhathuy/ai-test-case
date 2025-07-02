@@ -6,5 +6,7 @@ export const QueryKeys = {
 
 export const MutationKeys = {
 	createWallet: 'createWallet',
-	updateCategory: 'updateCategory'
+	updateCategory: 'updateCategory',
+	createCategory: 'createCategory',
+	deleteCategory: 'deleteCategory'
 };

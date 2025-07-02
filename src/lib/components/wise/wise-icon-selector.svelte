@@ -1,26 +1,20 @@
 <script lang="ts">
-	import { QueryKeys } from '@/lib/common/constant/key.const';
 	import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '../ui/popover';
 
-	import { ServiceIcon } from '@/lib/common/services';
+	import { useGetListIcon } from '@/lib/common/services/mutations/app.query';
 	import type { Icon } from '@/lib/common/types/app.type';
 	import { WiseIcon } from '@/lib/components/wise';
-	import { createQuery } from '@tanstack/svelte-query';
-
 	let ref: HTMLButtonElement | null = $state(null);
 
 	type Props = {
-		icon?: Icon;
+		icon: Icon | null;
 	};
 
 	let { icon = $bindable() }: Props = $props();
 
-	const queryIcon = createQuery({
-		queryKey: [QueryKeys.getIcon],
-		queryFn: ServiceIcon.getIcon
-	});
+	const query = useGetListIcon();
 
-	const icons = $derived($queryIcon.data || []);
+	const icons = $derived($query.data || []);
 
 	$effect(() => {
 		if (!icon && icons) {

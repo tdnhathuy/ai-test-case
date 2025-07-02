@@ -28,7 +28,11 @@ const SERVERS = {
   "GET /api/auth/session": `/api/auth/session`,
   "GET /api/auth/verify-token": `/api/auth/verify-token`,
   "GET /api/profile/category": `/api/profile/category`,
+  "POST /api/profile/category": `/api/profile/category`,
   "PATCH /api/profile/category/[id]": (params: { id: (string | number) }) => {
+    return `/api/profile/category/${params['id']}`
+  },
+  "DELETE /api/profile/category/[id]": (params: { id: (string | number) }) => {
     return `/api/profile/category/${params['id']}`
   },
   "GET /api/profile/icon": `/api/profile/icon`,
@@ -158,7 +162,7 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 */
 export type KIT_ROUTES = {
   PAGES: { '/': never, '/category': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/transaction': never, '/wallet': never, '/auth': never }
-  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'GET /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never, 'GET /api/profile/wallet': never, 'POST /api/profile/wallet': never }
+  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'GET /api/profile/category': never, 'POST /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'DELETE /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never, 'GET /api/profile/wallet': never, 'POST /api/profile/wallet': never }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>
   Params: { 'id': never }
