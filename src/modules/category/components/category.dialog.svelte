@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { queryClient } from '@/lib/common/configs/query-client.config';
 	import { QueryKeys } from '@/lib/common/constant/key.const';
 	import type { PayloadUpdateCategory } from '@/lib/common/services/category.service';
 	import { useUpdateCategory } from '@/lib/common/services/mutations/app.muation';
@@ -16,16 +17,14 @@
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
 	import Input from '@/lib/components/ui/input/input.svelte';
 	import { WiseIconSelector } from '@/lib/components/wise';
-	import { useQueryClient } from '@tanstack/svelte-query';
-	const queryClient = useQueryClient();
-
 	const mutation = useUpdateCategory();
 
 	type Props = {
 		category: Category;
 	};
 
-	let { category }: Props = $props();
+	let props: Props = $props();
+	let category = $state(props.category);
 	let icon = $state<Icon>(category.icon);
 
 	let ref: HTMLButtonElement | null = $state(null);
@@ -47,7 +46,7 @@
 
 <DialogContent>
 	<DialogHeader>
-		<DialogTitle>{category.name}</DialogTitle>
+		<DialogTitle>Update Category</DialogTitle>
 	</DialogHeader>
 
 	<DialogDescription>

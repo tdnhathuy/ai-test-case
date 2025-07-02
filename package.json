@@ -46,7 +46,7 @@
 	"dependencies": {
 		"@auth/sveltekit": "^1.9.2",
 		"@google/genai": "^1.3.0",
-		"@tanstack/svelte-query": "^5.79.0",
+		"@tanstack/svelte-query": "5.81.5",
 		"@zodyac/zod-mongoose": "^4.1.0",
 		"axios": "^1.9.0",
 		"bson-objectid": "^2.0.4",

@@ -18,8 +18,8 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(@modelcontextprotocol/sdk@1.12.1)
       '@tanstack/svelte-query':
-        specifier: ^5.79.0
-        version: 5.79.0(svelte@5.32.1)
+        specifier: 5.81.5
+        version: 5.81.5(svelte@5.32.1)
       '@zodyac/zod-mongoose':
         specifier: ^4.1.0
         version: 4.1.0(mongoose@8.16.0)(zod@3.25.67)
@@ -640,11 +640,11 @@ packages:
     peerDependencies:
       vite: ^5.2.0 || ^6
 
-  '@tanstack/query-core@5.79.0':
-    resolution: {integrity: sha512-s+epTqqLM0/TbJzMAK7OEhZIzh63P9sWz5HEFc5XHL4FvKQXQkcjI8F3nee+H/xVVn7mrP610nVXwOytTSYd0w==}
+  '@tanstack/query-core@5.81.5':
+    resolution: {integrity: sha512-ZJOgCy/z2qpZXWaj/oxvodDx07XcQa9BF92c0oINjHkoqUPsmm3uG08HpTaviviZ/N9eP1f9CM7mKSEkIo7O1Q==}
 
-  '@tanstack/svelte-query@5.79.0':
-    resolution: {integrity: sha512-C7mXKtuVwvspYND+Sux+8dR7nMl6OLvjLmnwWGPH2H27A0aisxRfyQvvGexVD0nz6uWT8OT4fsjicaYCgBHwWQ==}
+  '@tanstack/svelte-query@5.81.5':
+    resolution: {integrity: sha512-P2TaL+dGHWwQ83CyX8I9icb/1lYUSFwqQvGHI8jzFbacOEtVtQQXB0N12fotvn/BDn7Eh+tyCNiiMN56tFuFJw==}
     peerDependencies:
       svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
 
@@ -2321,11 +2321,11 @@ snapshots:
       tailwindcss: 4.1.7
       vite: 6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)
 
-  '@tanstack/query-core@5.79.0': {}
+  '@tanstack/query-core@5.81.5': {}
 
-  '@tanstack/svelte-query@5.79.0(svelte@5.32.1)':
+  '@tanstack/svelte-query@5.81.5(svelte@5.32.1)':
     dependencies:
-      '@tanstack/query-core': 5.79.0
+      '@tanstack/query-core': 5.81.5
       svelte: 5.32.1
 
   '@types/cookie@0.6.0': {}

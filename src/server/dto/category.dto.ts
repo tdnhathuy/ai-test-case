@@ -21,8 +21,10 @@ export const DTOCategory = {
 				children: children.map((child) => ({
 					id: child._id.toString(),
 					name: child.name,
-					icon: DTOIcon.getIconById(profile, child.idIcon)
-				}))
+					icon: DTOIcon.getIconById(profile, child.idIcon),
+					type: child.type
+				})),
+				type: c.type
 			};
 		});
 	}

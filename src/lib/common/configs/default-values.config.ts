@@ -8,21 +8,21 @@ const EmptyIcon: IIcon = {
 	type: 'Default'
 };
 
-const createParent = (name: string, children: string[]): ICategory[] => {
+const createParent = (name: string, children: string[], type: EnumCategoryType): ICategory[] => {
 	const parentId = new ObjectId();
 	const arr: ICategory[] = children.map((child) => ({
 		_id: new ObjectId(),
 		name: child,
 		idIcon: EmptyIcon._id,
 		idParent: parentId,
-		type: EnumCategoryType.Expense
+		type
 	}));
 	return [
 		{
 			_id: parentId,
 			name,
 			idIcon: EmptyIcon._id,
-			type: EnumCategoryType.Expense,
+			type: type,
 			idParent: null
 		},
 		...arr
@@ -30,13 +30,36 @@ const createParent = (name: string, children: string[]): ICategory[] => {
 };
 
 export const createDefaultCategory = (): ICategory[] => {
-	const parentFood = createParent('Ăn uống', ['Ăn', 'Chợ', 'Cà phê', 'Nhà hàng', 'Party']);
-	console.log('parentFood', parentFood);
-	const parentCar = createParent('Xe', ['Xăng xe', 'Bảo dưỡng', 'Xe Khách', 'Grab']);
-	const parentShopping = createParent('Mua sắm', ['Lặt vặt', 'Đồ gia dụng']);
-	const parentBeauty = createParent('Làm đẹp', ['Cắt tóc', 'Mỹ phẩm', 'Outfit']);
-	const parentEntertainment = createParent('Giải trí', ['Game', 'Phim']);
-	const parentBill = createParent('Hoá đơn', ['Điện', 'Phí Quản lý', 'Internet', 'Thuê nhà']);
+	const parentFood = createParent(
+		'Ăn uống',
+		['Ăn', 'Chợ', 'Cà phê', 'Nhà hàng', 'Party'],
+		EnumCategoryType.Expense
+	);
+	const parentCar = createParent(
+		'Xe',
+		['Xăng xe', 'Bảo dưỡng', 'Xe Khách', 'Grab'],
+		EnumCategoryType.Expense
+	);
+	const parentShopping = createParent(
+		'Mua sắm',
+		['Lặt vặt', 'Đồ gia dụng'],
+		EnumCategoryType.Expense
+	);
+	const parentBeauty = createParent(
+		'Làm đẹp',
+		['Cắt tóc', 'Mỹ phẩm', 'Outfit'],
+		EnumCategoryType.Expense
+	);
+	const parentEntertainment = createParent('Giải trí', ['Game', 'Phim'], EnumCategoryType.Expense);
+	const parentBill = createParent(
+		'Hoá đơn',
+		['Điện', 'Phí Quản lý', 'Internet', 'Thuê nhà'],
+		EnumCategoryType.Expense
+	);
+
+	const income = ['Lương', 'Thưởng', 'Lãi', 'Mua bán']
+		.map((x) => createParent(x, [], EnumCategoryType.Income))
+		.flat();
 
 	return [
 		...parentFood,
@@ -44,7 +67,8 @@ export const createDefaultCategory = (): ICategory[] => {
 		...parentShopping,
 		...parentBeauty,
 		...parentEntertainment,
-		...parentBill
+		...parentBill,
+		...income
 	];
 };
 
