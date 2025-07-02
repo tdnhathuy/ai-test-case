@@ -1,4 +1,4 @@
-import type { IIcon } from '@/lib/common/schema/app.schema';
+import type { IIcon, IProfile } from '@/lib/common/schema/app.schema';
 import objectId from 'bson-objectid';
 
 export const genMongoId = (): string => {
@@ -12,4 +12,8 @@ export const genIconByUrl = (url: string): IIcon => {
 		type: 'Default',
 		url
 	};
+};
+
+export const getDefaultIconByProfile = (profile: IProfile): IIcon => {
+	return profile.icon[0];
 };

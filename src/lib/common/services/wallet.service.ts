@@ -6,13 +6,24 @@ export const ServiceWallet = {
 	getWallet: () => {
 		return api.get<Wallet[]>('GET /api/profile/wallet');
 	},
+
 	createWallet: (payload: PayloadCreateWallet) => {
 		return api.post<Wallet>('POST /api/profile/wallet', payload);
+	},
+	updateWallet: (payload: PayloadUpdateWallet) => {
+		const url = route('PATCH /api/profile/wallet/[id]', { id: payload.wallet.id });
+		return api.patch<Wallet>(url, payload);
+	},
+	deleteWallet: (id: string) => {
+		const url = route('DELETE /api/profile/wallet/[id]', { id });
+		return api.del<Wallet>(url);
 	}
 };
 
 export interface PayloadCreateWallet {
-	name: string;
-	balance: number;
-	icon: string;
+	wallet: Wallet;
+}
+
+export interface PayloadUpdateWallet {
+	wallet: Wallet;
 }

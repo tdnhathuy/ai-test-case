@@ -8,7 +8,7 @@
 	const { children, className, onClick }: Props = $props();
 
 	const classesTW = cn(
-		'flex h-48 w-32 flex-col gap-2 rounded-lg bg-red-400 p-2',
+		'flex h-48 w-40 flex-col gap-2 rounded-lg bg-white p-2',
 		'shadow-md',
 		onClick && 'cursor-pointer',
 		className

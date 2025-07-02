@@ -1,4 +1,4 @@
-import { responseError, responseSuccess } from '@/lib/common/helpers';
+import { getDefaultIconByProfile, responseError, responseSuccess } from '@/lib/common/helpers';
 import { ProfileModel } from '@/lib/common/schema/app.schema';
 import { DTOCategory } from '@/server/dto';
 import type { RequestHandler } from './$types';
@@ -44,8 +44,8 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 		return responseError('Profile not found', 'PROFILE_NOT_FOUND');
 	}
 
-	const defaultIcon = profile.icon[0];
-	const idIcon = body.icon?.id ?? defaultIcon._id.toString();
+	const idIcon = body.icon?.id || getDefaultIconByProfile(profile)._id.toString();
+
 	profile.category.push({
 		_id: new ObjectId(),
 		type: body.type,

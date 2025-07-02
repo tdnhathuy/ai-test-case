@@ -1,4 +1,5 @@
-import { responseError, responseSuccess } from '@/lib/common/helpers';
+import { getDefaultIconByProfile, responseError, responseSuccess } from '@/lib/common/helpers';
+import type { PayloadCreateWallet } from '@/lib/common/services/wallet.service.js';
 import { DTOWallet } from '@/server/dto/wallet.dto.js';
 import { getProfileByEmail } from '@/server/repository';
 import { ObjectId } from 'mongodb';
@@ -17,11 +18,17 @@ export const POST = async ({ locals, request }) => {
 	const email = user?.email!;
 	const profile = await getProfileByEmail(email);
 
-	const wallet = await request.json();
+	const payload = (await request.json()) as PayloadCreateWallet;
 
 	if (!profile) return responseError('Profile not found', 'PROFILE_NOT_FOUND');
 
-	profile.wallet.push({ ...wallet, _id: new ObjectId() });
+	const idIcon = payload.wallet.icon?.id || getDefaultIconByProfile(profile)._id.toString();
+
+	profile.wallet.push({
+		...payload.wallet,
+		_id: new ObjectId(),
+		idIcon: idIcon
+	});
 	await profile.save({});
 
 	return responseSuccess({

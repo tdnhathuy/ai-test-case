@@ -6,7 +6,30 @@ import { createMutation } from '@tanstack/svelte-query';
 export const useCreateWallet = () => {
 	return createMutation({
 		mutationKey: [MutationKeys.createWallet],
-		mutationFn: ServiceWallet.createWallet
+		mutationFn: ServiceWallet.createWallet,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getWallet] });
+		}
+	});
+};
+
+export const useUpdateWallet = () => {
+	return createMutation({
+		mutationKey: [MutationKeys.updateWallet],
+		mutationFn: ServiceWallet.updateWallet,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getWallet] });
+		}
+	});
+};
+
+export const useDeleteWallet = () => {
+	return createMutation({
+		mutationKey: [MutationKeys.deleteWallet],
+		mutationFn: ServiceWallet.deleteWallet,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getWallet] });
+		}
 	});
 };
 

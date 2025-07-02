@@ -42,7 +42,7 @@
 					'hover:bg-accent hover:rounded-md'
 				)}
 			>
-				<WiseIcon url={category.icon.url} size={iconSize} />
+				<WiseIcon url={category.icon?.url ?? ''} size={iconSize} />
 				<span class="text-md font-semibold">{category.name}</span>
 			</span>
 		</DialogTrigger>

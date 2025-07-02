@@ -1,4 +1,8 @@
-import type { EnumCategoryType, ICategoryType } from '@/lib/common/enum/collection.enum';
+import type {
+	EnumCategoryType,
+	ICategoryType,
+	IWalletType
+} from '@/lib/common/enum/collection.enum';
 import type { Session } from '@auth/sveltekit';
 
 export interface BasePageProps {
@@ -36,6 +40,7 @@ export interface Icon {
 export interface Wallet {
 	id: string;
 	name: string;
-	icon: Icon;
+	icon: Icon | null;
 	initBalance: number;
+	type: IWalletType;
 }
