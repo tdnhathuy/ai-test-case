@@ -30,8 +30,8 @@
 </script>
 
 <Popover>
-	<PopoverTrigger class="cursor-pointer">
-		<WiseIcon url={icon?.url ?? icons?.[0]?.url ?? ''} size={'lg'} />
+	<PopoverTrigger class="flex-shrink-0 cursor-pointer">
+		<WiseIcon url={icon?.url ?? icons?.[0]?.url ?? ''} size={'md'} />
 	</PopoverTrigger>
 
 	<PopoverContent class="flex flex-col gap-2">
@@ -39,7 +39,7 @@
 			{#each icons as iconItem}
 				<WiseIcon
 					url={iconItem.url}
-					size={'lg'}
+					size={'md'}
 					onclick={() => {
 						icon = iconItem;
 						ref?.click();

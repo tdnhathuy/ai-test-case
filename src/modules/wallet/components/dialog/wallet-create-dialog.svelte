@@ -2,7 +2,7 @@
 	import { queryClient } from '@/lib/common/configs/query-client.config';
 	import { QueryKeys } from '@/lib/common/constant/key.const';
 	import { genMongoId } from '@/lib/common/helpers';
-	import { useCreateWallet } from '@/lib/common/services/mutations/app.muation';
+	import { useCreateWallet } from '@/lib/common/services/mutations/app.mutation';
 	import type { PayloadCreateWallet } from '@/lib/common/services/wallet.service';
 	import type { Icon, Wallet } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';

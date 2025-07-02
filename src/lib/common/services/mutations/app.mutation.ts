@@ -9,11 +9,9 @@ export const useCreateWallet = () => {
 	});
 };
 
-
-
 export const useUpdateCategory = () => {
 	return createMutation({
 		mutationKey: [MutationKeys.updateCategory],
 		mutationFn: ServiceCategory.updateCategory
 	});
-};	
+};

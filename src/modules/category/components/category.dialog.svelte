@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { queryClient } from '@/lib/common/configs/query-client.config';
 	import { QueryKeys } from '@/lib/common/constant/key.const';
-	import type { PayloadUpdateCategory } from '@/lib/common/services/category.service';
-	import { useUpdateCategory } from '@/lib/common/services/mutations/app.muation';
-	import type { Category, Icon } from '@/lib/common/types/app.type';
+	import { useUpdateCategory } from '@/lib/common/services/mutations/app.mutation';
+	import type { Category } from '@/lib/common/types/app.type';
 	import ButtonBase from '@/lib/components/svelte/button/button-base.svelte';
-	import LabelSection from '@/lib/components/svelte/label-section.svelte';
 	import Stack from '@/lib/components/svelte/stack.svelte';
 	import {
 		DialogContent,
@@ -15,8 +13,9 @@
 		DialogTitle
 	} from '@/lib/components/ui/dialog';
 	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
-	import Input from '@/lib/components/ui/input/input.svelte';
 	import { WiseIconSelector } from '@/lib/components/wise';
+	import WiseInput from '@/lib/components/wise/wise-input.svelte';
+	import CategoryRadio from './category.radio.svelte';
 	const mutation = useUpdateCategory();
 
 	type Props = {
@@ -24,18 +23,13 @@
 	};
 
 	let props: Props = $props();
+
 	let category = $state(props.category);
-	let icon = $state<Icon>(category.icon);
 
 	let ref: HTMLButtonElement | null = $state(null);
 
 	const onPressSave = async () => {
-		const payload: PayloadUpdateCategory = {
-			name: category.name,
-			idCategory: category.id,
-			idIcon: icon.id
-		};
-		await $mutation.mutateAsync(payload, { onSuccess });
+		await $mutation.mutateAsync({ category }, { onSuccess });
 	};
 
 	const onSuccess = () => {
@@ -44,18 +38,19 @@
 	};
 </script>
 
-<DialogContent>
+<DialogContent class="w-sm">
 	<DialogHeader>
 		<DialogTitle>Update Category</DialogTitle>
 	</DialogHeader>
 
 	<DialogDescription>
-		<Stack class=" flex flex-col items-center gap-4">
-			<WiseIconSelector bind:icon />
+		<Stack vertical class="gap-4">
+			<Stack class="items-center gap-2">
+				<WiseIconSelector bind:icon={category.icon} />
+				<WiseInput type="text" placeholder="Tên danh mục" bind:value={category.name} />
+			</Stack>
 
-			<LabelSection label="Tên danh mục" class="w-full">
-				<Input type="text" placeholder="Tên danh mục" class="w-full" bind:value={category.name} />
-			</LabelSection>
+			<CategoryRadio bind:category />
 		</Stack>
 	</DialogDescription>
 

@@ -11,9 +11,9 @@
 	let { url, size = 'md', class: className, onclick }: IconProps = $props();
 
 	const sizeMap = {
-		sm: 'size-6',
-		md: 'size-10',
-		lg: 'size-14'
+		sm: ' w-6 h-6',
+		md: ' w-10 h-10',
+		lg: ' w-14 h-14'
 	};
 </script>
 
