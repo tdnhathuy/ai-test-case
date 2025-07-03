@@ -2,14 +2,24 @@
 	import { cn } from '@/lib/utils';
 	import type { Snippet } from 'svelte';
 
-	let {
-		label,
-		children,
-		class: className
-	}: { label: string; children: Snippet; class?: string } = $props();
+	type Props = {
+		label: string;
+		children: Snippet;
+		class?: string;
+		vertical?: boolean;
+	};
+
+	let { label, children, class: className, vertical }: Props = $props();
 </script>
 
-<section class={cn('flex flex-col gap-2', className)}>
+<section
+	class={cn(
+		'flex flex-col gap-2',
+		vertical && 'flex-row items-center justify-between ',
+		//
+		className
+	)}
+>
 	<h1>{label}</h1>
 	{@render children()}
 </section>

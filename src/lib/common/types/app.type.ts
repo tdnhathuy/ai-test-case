@@ -30,6 +30,8 @@ export interface Transaction {
 	amount: number;
 	date: string;
 	description: string;
+	category: Category | null;
+	wallet: Wallet | null;
 }
 export interface Icon {
 	id: string;

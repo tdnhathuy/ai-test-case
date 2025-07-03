@@ -2,7 +2,7 @@
 	import { CDNIcon } from '@/lib/common/configs/cdn.config';
 	import type { IWalletType } from '@/lib/common/enum/collection.enum';
 	import type { Wallet } from '@/lib/common/types/app.type';
-	import Stack from '@/lib/components/svelte/stack.svelte';
+	import Stack from '@/lib/components/wise/stack.svelte';
 	import { Dialog, DialogTrigger } from '@/lib/components/ui/dialog';
 	import { WiseIcon } from '@/lib/components/wise';
 	import WalletDialog from '../dialog/wallet.dialog.svelte';

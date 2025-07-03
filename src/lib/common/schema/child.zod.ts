@@ -44,9 +44,7 @@ export const zodTransaction = z.object({
 	_id: zodIdCommon,
 	amount: z.number(),
 	date: z.date(),
-	description: z.string().optional(),
-
-	idIcon: zodIdCommon, // chỉ ObjectId
-	idCategory: zodIdCommon, // chỉ ObjectId
-	idWallet: zodIdCommon // chỉ ObjectId
+	description: z.string().optional().nullable(),
+	idCategory: zodIdCommon.optional().nullable(),
+	idWallet: zodIdCommon.optional().nullable()
 });

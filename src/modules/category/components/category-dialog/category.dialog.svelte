@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Category } from '@/lib/common/types/app.type';
-	import Stack from '@/lib/components/svelte/stack.svelte';
+	import Stack from '@/lib/components/wise/stack.svelte';
 	import {
 		DialogContent,
 		DialogDescription,

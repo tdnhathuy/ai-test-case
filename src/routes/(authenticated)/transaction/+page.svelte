@@ -1,1 +1,5 @@
-<h1>Transaction</h1>
+<script lang="ts">
+	import { TransactionPage } from '@/modules';
+</script>
+
+<TransactionPage />

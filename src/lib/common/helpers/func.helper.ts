@@ -1,4 +1,5 @@
 import type { IIcon, IProfile } from '@/lib/common/schema/app.schema';
+import type { Transaction } from '@/lib/common/types';
 import objectId from 'bson-objectid';
 
 export const genMongoId = (): string => {
@@ -16,4 +17,15 @@ export const genIconByUrl = (url: string): IIcon => {
 
 export const getDefaultIconByProfile = (profile: IProfile): IIcon => {
 	return profile.icon[0];
+};
+
+export const genDefaultTrans = (transaction?: Transaction): Transaction => {
+	return {
+		id: transaction?.id ?? genMongoId(),
+		amount: 0,
+		date: transaction?.date ?? new Date().toISOString(),
+		description: transaction?.description ?? '',
+		category: transaction?.category ?? null,
+		wallet: transaction?.wallet ?? null
+	};
 };
