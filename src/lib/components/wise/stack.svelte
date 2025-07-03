@@ -11,6 +11,6 @@
 	let { children, class: className = '', vertical = false }: Props = $props();
 </script>
 
-<div class={cn('flex gap-2', vertical ? 'flex-col' : 'flex-row', className)}>
+<div class={cn('flex flex-col gap-2', vertical && 'flex-col', className)}>
 	{@render children?.()}
 </div>
