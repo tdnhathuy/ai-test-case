@@ -5,16 +5,16 @@
 
 	type Props = {
 		transaction: Transaction;
-		refClose: HTMLDialogElement | null;
+		refClose: HTMLButtonElement | null;
 	};
 
-	let { transaction, refClose }: Props = $props();
+	let { transaction = $bindable(), refClose }: Props = $props();
 
 	const mutate = useCreateTrans();
 
 	const handleCreateTrans = () => {
 		$mutate.mutateAsync({ transaction });
-		refClose?.close();
+		refClose?.click();
 	};
 </script>
 

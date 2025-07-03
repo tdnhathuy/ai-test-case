@@ -1,34 +1,20 @@
 import { responseError, responseSuccess } from '@/lib/common/helpers';
-import { connectMongo } from '@/lib/common/server/mongoose';
 import { ProfileModel } from '@/lib/common/schema/app.schema';
+import { validateInfo } from '@/lib/common/server';
 import { DTOProfile } from '@/server/dto';
-import { createNewProfile, getProfileByEmail } from '@/server/repository/profile.repo';
+import { createNewProfile } from '@/server/repository/profile.repo';
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ locals, url }) => {
-	const user = (await locals.auth())?.user;
-	if (!user) return responseError('User not found', 'USER_NOT_FOUND');
+export const GET: RequestHandler = async (event) => {
+	const { email } = await validateInfo(event);
 
-	await connectMongo();
+	await ProfileModel.deleteOne({ email });
+	await createNewProfile(email);
 
-	const isForceSetup = url.searchParams.get('forceSetup') === 'true';
-	const email = user.email!;
+	const updatedProfile = await ProfileModel.findOne({ email });
 
-	const existing = await getProfileByEmail(email);
-
-	if (!existing) {
-		await createNewProfile(email);
-	}
-
-	if (isForceSetup) {
-		await ProfileModel.deleteOne({ email });
-		await createNewProfile(email);
-	}
-
-	const profile = await ProfileModel.findOne({ email });
-
-	if (profile) {
-		return responseSuccess({ profile: DTOProfile.fromModel(profile) });
+	if (updatedProfile) {
+		return responseSuccess({ profile: DTOProfile.fromModel(updatedProfile) });
 	}
 
 	return responseError('Profile not found', 'PROFILE_NOT_FOUND');

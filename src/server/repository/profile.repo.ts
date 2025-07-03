@@ -5,10 +5,6 @@ import {
 import { ProfileModel, type IProfile } from '@/lib/common/schema/app.schema';
 import { ObjectId } from 'mongodb';
 
-export const getProfileByEmail = async (email: string) => {
-	return await ProfileModel.findOne({ email });
-};
-
 export const createNewProfile = async (email: string) => {
 	const newProfile: IProfile = {
 		_id: new ObjectId(),

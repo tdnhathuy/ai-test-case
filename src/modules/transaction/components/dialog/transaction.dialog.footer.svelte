@@ -9,16 +9,16 @@
 		isCreate?: boolean;
 	};
 
-	let { transaction, isCreate }: Props = $props();
+	let { transaction = $bindable(), isCreate }: Props = $props();
 
-	let refClose = $state<HTMLDialogElement | null>(null);
+	let refClose = $state<HTMLButtonElement | null>(null);
 </script>
 
 <DialogFooter>
 	{#if isCreate}
-		<ButtonCreateTrans {transaction} {refClose} />
+		<ButtonCreateTrans bind:transaction {refClose} />
 	{:else}
-		<ButtonUpdateTrans {transaction} {refClose} />
+		<ButtonUpdateTrans bind:transaction {refClose} />
 	{/if}
 </DialogFooter>
 

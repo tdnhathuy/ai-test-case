@@ -12,22 +12,27 @@
 
 	let props: Props = $props();
 
-	let transaction = $state(genDefaultTrans(props.transaction));
+	// Always create a fresh copy to avoid state sharing
+	let transaction = $state(structuredClone(genDefaultTrans(props.transaction)));
+
+	// Reset transaction when props change
+	$effect(() => {
+		transaction = structuredClone(genDefaultTrans(props.transaction));
+	});
 </script>
 
 <WiseDialogContent title={props.isCreate ? 'Thêm giao dịch' : 'Chi tiết giao dịch'} {footer}>
 	<section class="flex flex-col gap-4">
 		<LabelSection label="Số tiền" vertical>
-			<!-- <WiseInput class="w-48 text-right" type="number" bind:value={transaction.amount} /> -->
-			<WiseInput class="w-48 text-right" type="number" value={transaction.amount} />
+			<WiseInput class="w-48 text-right" type="number" bind:value={transaction.amount} />
 		</LabelSection>
 
 		<Stack class=" justify-around">
-			<LabelSection label="" vertical>
+			<LabelSection label="Ví" vertical>
 				<WalletSelection bind:transaction />
 			</LabelSection>
 
-			<LabelSection label="" vertical>
+			<LabelSection label="Danh mục" vertical>
 				<CategorySelection bind:transaction />
 			</LabelSection>
 		</Stack>
@@ -43,5 +48,5 @@
 </WiseDialogContent>
 
 {#snippet footer()}
-	<TransactionDialogFooter {transaction} isCreate={props.isCreate} />
+	<TransactionDialogFooter bind:transaction isCreate={props.isCreate} />
 {/snippet}

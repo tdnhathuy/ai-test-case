@@ -29,5 +29,16 @@ export const DTOCategory = {
 				idParent: c.idParent?.toString() ?? null
 			};
 		});
+	},
+
+	fromProfileAndId: (profile: IProfile, id: string): Category => {
+		const category = profile.category.find((c) => c._id.toString() === id);
+		return {
+			id: category?._id.toString() ?? '',
+			name: category?.name ?? '',
+			icon: DTOIcon.getIconById(profile, category?.idIcon ?? ''),
+			type: category?.type ?? 'Expense',
+			idParent: category?.idParent?.toString() ?? null
+		};
 	}
 };

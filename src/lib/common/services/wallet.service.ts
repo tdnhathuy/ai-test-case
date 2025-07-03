@@ -21,7 +21,7 @@ export const ServiceWallet = {
 };
 
 export interface PayloadCreateWallet {
-	wallet: Wallet;
+	wallet: Omit<Wallet, 'id'>;
 }
 
 export interface PayloadUpdateWallet {

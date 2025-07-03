@@ -8,6 +8,9 @@
 	};
 
 	let { transaction }: Props = $props();
+	
+	// Create a reactive copy to avoid mutating the original
+	let transactionCopy = $derived(structuredClone(transaction));
 </script>
 
 <Dialog>
@@ -25,5 +28,5 @@
 		</div>
 	</DialogTrigger>
 
-	<TransactionDialog {transaction} />
+	<TransactionDialog transaction={transactionCopy} />
 </Dialog>

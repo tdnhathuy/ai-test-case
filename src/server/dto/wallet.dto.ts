@@ -15,5 +15,15 @@ export const DTOWallet = {
 				initBalance: wallet.initBalance
 			};
 		});
+	},
+	fromProfileAndId: (profile: IProfile, id: string): Wallet => {
+		const wallet = profile.wallet.find((w) => w._id.toString() === id);
+		return {
+			id: wallet?._id.toString() ?? '',
+			name: wallet?.name ?? '',
+			icon: DTOIcon.getIconById(profile, wallet?.idIcon ?? ''),
+			initBalance: wallet?.initBalance ?? 0,
+			type: wallet?.type ?? 'Cash'
+		};
 	}
 };

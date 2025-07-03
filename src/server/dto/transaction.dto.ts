@@ -9,9 +9,9 @@ export const DTOTransaction = {
 			const idCategoryStr = trans.idCategory?.toString();
 			const idWalletStr = trans.idWallet?.toString();
 
-			const category =
-				DTOCategory.fromProfile(profile).find(({ id }) => id === idCategoryStr) ?? null;
-			const wallet = DTOWallet.fromProfile(profile).find(({ id }) => id === idWalletStr) ?? null;
+			const category = DTOCategory.fromProfileAndId(profile, idCategoryStr ?? '');
+			const wallet = DTOWallet.fromProfileAndId(profile, idWalletStr ?? '');
+
 			return {
 				id: trans._id.toString(),
 				amount: trans.amount,

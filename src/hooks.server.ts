@@ -2,7 +2,7 @@ import { type Routes } from '@/lib/ROUTES';
 import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import { handle as handleAuth } from './auth';
-import { connectMongo } from '@/lib/common/server/mongoose';
+import { connectMongo } from '@/lib/common/server/mongoose.server';
 
 const ignoreChromeDevTools: Handle = async ({ event, resolve }) => {
 	if (event.url.pathname.startsWith('/.well-known/appspecific/com.chrome.devtools')) {
@@ -34,4 +34,9 @@ const authorizationHandle: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-export const handle: Handle = sequence(initDb, ignoreChromeDevTools, handleAuth, authorizationHandle);
+export const handle: Handle = sequence(
+	initDb,
+	ignoreChromeDevTools,
+	handleAuth,
+	authorizationHandle
+);
