@@ -1,18 +1,21 @@
 <script lang="ts">
+	import { CDNIcon } from '@/lib/common/configs/cdn.config';
 	import type { Icon } from '@/lib/common/types';
 	import { cn } from '@/lib/utils';
+	import { Loader } from '@lucide/svelte';
 
 	interface IconProps {
-		icon?: Icon;
-		url?: string | null | undefined;
+		icon?: Icon | null;
+		url?: string | null;
 		class?: string;
 		size?: 'xs' | 'sm' | 'md' | 'lg';
 		onclick?: () => void;
+		defaultIcon?: boolean;
 	}
 
 	let { icon, url, size = 'md', class: className, onclick }: IconProps = $props();
 
-	const urlIcon = $derived(icon?.url || url);
+	const urlIcon = $derived(icon?.url || url || CDNIcon.img_crash);
 
 	const sizeMap = {
 		xs: ' w-4 h-4',
@@ -22,12 +25,15 @@
 	};
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<img
-	draggable={false}
-	src={urlIcon}
-	alt=""
-	class={cn(sizeMap[size], onclick && 'cursor-pointer', className)}
-	{onclick}
-/>
+{#if !urlIcon}
+	<Loader class="animate-spin" />
+{:else}
+	<button class="flex items-center justify-center" {onclick}>
+		<img
+			draggable={false}
+			src={urlIcon}
+			alt=""
+			class={cn(sizeMap[size], onclick && 'cursor-pointer', className)}
+		/>
+	</button>
+{/if}

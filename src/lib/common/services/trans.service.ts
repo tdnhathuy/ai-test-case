@@ -8,9 +8,17 @@ export const ServiceTrans = {
 	},
 	createTrans: async (payload: PayloadCreateTrans) => {
 		return api.post(route('POST /api/profile/transaction'), payload);
+	},
+	updateTrans: async (payload: PayloadUpdateTrans) => {
+		const url = route('PATCH /api/profile/transaction/[id]', { id: payload.transaction.id });
+		return api.patch(url, payload);
 	}
 };
 
 export interface PayloadCreateTrans {
+	transaction: Transaction;
+}
+
+export interface PayloadUpdateTrans {
 	transaction: Transaction;
 }

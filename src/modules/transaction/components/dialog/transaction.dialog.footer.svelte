@@ -1,20 +1,25 @@
 <script lang="ts">
-	import { useCreateTrans } from '@/lib/common/services';
 	import type { Transaction } from '@/lib/common/types';
 	import { DialogFooter } from '@/lib/components/ui/dialog';
-	import { WiseButton } from '@/lib/components/wise';
+	import DialogClose from '@/lib/components/ui/dialog/dialog-close.svelte';
+	import { ButtonCreateTrans, ButtonUpdateTrans } from '@/modules/transaction/components/button';
 
 	type Props = {
 		transaction: Transaction;
+		isCreate?: boolean;
 	};
 
-	let { transaction = $bindable() }: Props = $props();
-    
-	const onCreateTrans = () => {
-        console.log('transaction', {...transaction})
-	};
+	let { transaction, isCreate }: Props = $props();
+
+	let refClose = $state<HTMLDialogElement | null>(null);
 </script>
 
 <DialogFooter>
-	<WiseButton onclick={onCreateTrans}>Tạo giao dịch</WiseButton>
+	{#if isCreate}
+		<ButtonCreateTrans {transaction} {refClose} />
+	{:else}
+		<ButtonUpdateTrans {transaction} {refClose} />
+	{/if}
 </DialogFooter>
+
+<DialogClose bind:ref={refClose} />

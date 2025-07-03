@@ -22,10 +22,22 @@ export const POST: RequestHandler = async ({ locals, request }) => {
 
 	const { transaction } = (await request.json()) as PayloadCreateTrans;
 
+	const idCategory = transaction.category?.id ? new ObjectId(transaction.category.id) : null;
+	const idWallet = transaction.wallet?.id ? new ObjectId(transaction.wallet.id) : null;
+
 	const email = user.email!;
 	const result = await ProfileModel.findOneAndUpdate(
 		{ email: email },
-		{ $push: { transaction: { ...transaction, _id: new ObjectId(transaction.id) } } },
+		{
+			$push: {
+				transaction: {
+					...transaction,
+					_id: new ObjectId(transaction.id),
+					idCategory,
+					idWallet
+				}
+			}
+		},
 		{ returnDocument: 'after' }
 	);
 

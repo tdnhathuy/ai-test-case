@@ -12,5 +12,6 @@ export const MutationKeys = {
 	updateCategory: 'updateCategory',
 	createCategory: 'createCategory',
 	deleteCategory: 'deleteCategory',
-	createTrans: 'createTrans'
+	createTrans: 'createTrans',
+	updateTrans: 'updateTrans'
 };

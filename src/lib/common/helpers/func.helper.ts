@@ -1,5 +1,6 @@
 import type { IIcon, IProfile } from '@/lib/common/schema/app.schema';
 import type { Transaction } from '@/lib/common/types';
+import type { Category } from '@/lib/common/types/app.type';
 import objectId from 'bson-objectid';
 
 export const genMongoId = (): string => {
@@ -22,10 +23,18 @@ export const getDefaultIconByProfile = (profile: IProfile): IIcon => {
 export const genDefaultTrans = (transaction?: Transaction): Transaction => {
 	return {
 		id: transaction?.id ?? genMongoId(),
-		amount: 0,
+		amount: transaction?.amount ?? 0,
 		date: transaction?.date ?? new Date().toISOString(),
 		description: transaction?.description ?? '',
 		category: transaction?.category ?? null,
 		wallet: transaction?.wallet ?? null
 	};
+};
+
+export const getListIncome = (listCategory: Category[]): Category[] => {
+	return listCategory.filter((category) => category.type === 'Income');
+};
+
+export const getListExpense = (listCategory: Category[]): Category[] => {
+	return listCategory.filter((category) => category.type === 'Expense');
 };

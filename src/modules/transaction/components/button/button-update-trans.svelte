@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { useCreateTrans } from '@/lib/common/services';
+	import { useUpdateTrans } from '@/lib/common/services';
 	import type { Transaction } from '@/lib/common/types';
 	import { WiseButton } from '@/lib/components/wise';
 
@@ -10,12 +10,12 @@
 
 	let { transaction, refClose }: Props = $props();
 
-	const mutate = useCreateTrans();
+	const mutate = useUpdateTrans();
 
-	const handleCreateTrans = () => {
+	const handleUpdateTrans = () => {
 		$mutate.mutateAsync({ transaction });
 		refClose?.close();
 	};
 </script>
 
-<WiseButton onclick={handleCreateTrans}>Tạo Giao Dịch</WiseButton>
+<WiseButton onclick={handleUpdateTrans}>Cập nhật Giao Dịch</WiseButton>

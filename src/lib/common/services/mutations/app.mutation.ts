@@ -72,3 +72,13 @@ export const useCreateTrans = () => {
 		}
 	});
 };
+
+export const useUpdateTrans = () => {
+	return createMutation({
+		mutationKey: [MutationKeys.updateTrans],
+		mutationFn: ServiceTrans.updateTrans,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getTrans] });
+		}
+	});
+};
