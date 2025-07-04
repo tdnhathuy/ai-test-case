@@ -1,3 +1,4 @@
+import { CDNIcon, flatIcon } from '@/lib/common/configs/cdn.config';
 import { convertIdFlatIcon } from '@/lib/common/helpers';
 import type { IProfile } from '@/lib/common/schema/app.schema';
 import type { Icon } from '@/lib/common/types/app.type';
@@ -8,7 +9,7 @@ export const DTOIcon = {
 		return profile.icon.map((icon) => ({
 			id: icon._id.toString(),
 			code: icon.code ?? '',
-			url: convertIdFlatIcon(icon.code ?? '') ?? ''
+			url: convertIdFlatIcon(icon.code ?? flatIcon.img_crash)
 		}));
 	},
 
@@ -17,7 +18,7 @@ export const DTOIcon = {
 		return {
 			id: icon?._id.toString() ?? '',
 			code: icon?.code ?? '',
-			url: convertIdFlatIcon(icon?.code ?? '') ?? ''
+			url: convertIdFlatIcon(icon?.code ?? flatIcon.img_crash)
 		};
 	}
 };

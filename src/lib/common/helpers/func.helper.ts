@@ -1,3 +1,4 @@
+import { CDNIcon, flatIcon } from '@/lib/common/configs/cdn.config';
 import type { IIcon, IProfile } from '@/lib/common/schema/app.schema';
 import type { Transaction } from '@/lib/common/types';
 import type { Category } from '@/lib/common/types/app.type';

@@ -4,6 +4,7 @@ import type { AxiosRequestConfig } from 'axios';
 import { browser } from '$app/environment';
 import { getCachedAuthToken } from '@/lib/common/helpers';
 import axios from 'axios';
+import { dev } from '$app/environment';
 
 type RouteKey = keyof KIT_ROUTES['SERVERS'];
 type BuiltUrl = ReturnType<typeof route>;
@@ -11,7 +12,9 @@ type BuiltUrl = ReturnType<typeof route>;
 const isRouteKey = (u: RouteKey | BuiltUrl): u is RouteKey => /^[A-Z]+ /.test(u);
 const build = (u: RouteKey | BuiltUrl): BuiltUrl => (isRouteKey(u) ? route(u as any) : u);
 
-const client = axios.create({ baseURL: 'http://localhost:3000' });
+const baseURL = dev ? 'http://localhost:3000' : 'https://spendly-wise.vercel.app';
+
+const client = axios.create({ baseURL });
 
 client.interceptors.request.use(async (config) => {
 	config.headers['Content-Type'] = 'application/json';

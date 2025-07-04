@@ -5,7 +5,7 @@
 	import { buttonVariants } from '$lib/components/ui/button/index.js';
 	import { Calendar } from '$lib/components/ui/calendar/index.js';
 	import * as Popover from '$lib/components/ui/popover/index.js';
-	import { isoToDateValue, dateValueToIso } from '@/lib/common/helpers';
+	import { isoToDateValue, dateValueToIso, formatDate } from '@/lib/common/helpers';
 
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'long'
@@ -41,7 +41,8 @@
 		)}
 	>
 		<CalendarIcon />
-		{internalDate ? df.format(internalDate.toDate(getLocalTimeZone())) : 'Pick a date'}
+		<!-- {internalDate ? df.format(internalDate.toDate(getLocalTimeZone())) : 'Pick a date'} -->
+		{internalDate ? formatDate(internalDate.toDate(getLocalTimeZone())) : 'Pick a date'}
 	</Popover.Trigger>
 	<Popover.Content bind:ref={contentRef} class="w-auto p-0">
 		<Calendar type="single" bind:value={internalDate} onValueChange={handleDateChange} />

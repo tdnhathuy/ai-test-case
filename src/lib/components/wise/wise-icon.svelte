@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { CDNIcon } from '@/lib/common/configs/cdn.config';
+	import { CDNIcon, flatIcon } from '@/lib/common/configs/cdn.config';
+	import { convertIdFlatIcon } from '@/lib/common/helpers';
 	import type { Icon } from '@/lib/common/types';
 	import { cn } from '@/lib/utils';
 	import { Loader } from '@lucide/svelte';
@@ -15,7 +16,7 @@
 
 	let { icon, url, size = 'md', class: className, onclick }: IconProps = $props();
 
-	const urlIcon = $derived(icon?.url || url || CDNIcon.img_crash);
+	const urlIcon = $derived(icon?.url || url);
 
 	const sizeMap = {
 		xs: ' w-4 h-4',
@@ -26,7 +27,7 @@
 </script>
 
 {#if !urlIcon}
-	<Loader class="animate-spin" />
+	<!-- <Loader class="animate-spin" /> -->
 {:else}
 	<img
 		draggable={false}
