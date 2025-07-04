@@ -35,5 +35,10 @@ export const flatIcon = {
 	internet: '515636',
 	rent: '2603710',
 	games: '2780137',
-	movies: '4221484'
+	movies: '4221484',
+	invoice: '8072446',
+	salary: '3732667',
+	bonus: '5110795',
+	profit: '3526048',
+	trading: '7314483'
 };

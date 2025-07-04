@@ -4,91 +4,6 @@ import values from 'lodash/values';
 import { ObjectId } from 'mongodb';
 import { flatIcon } from './cdn.config';
 
-const EmptyIcon: IIcon = {
-	_id: new ObjectId(),
-	code: flatIcon.img_crash,
-	type: 'Default'
-};
-
-const createParent = (
-	name: string,
-	children: string[],
-	type: EnumCategoryType,
-	idIcon: string
-): ICategory[] => {
-	const parentId = new ObjectId();
-	const arr: ICategory[] = children.map((child) => ({
-		_id: new ObjectId(),
-		name: child,
-		idIcon: idIcon,
-		idParent: parentId,
-		type
-	}));
-	return [
-		{
-			_id: parentId,
-			name,
-			idIcon: EmptyIcon._id,
-			type: type,
-			idParent: null
-		},
-		...arr
-	];
-};
-
-export const createDefaultCategory = (): ICategory[] => {
-	const parentFood = createParent(
-		'Ăn uống',
-		['Ăn', 'Chợ', 'Cà phê', 'Nhà hàng', 'Party'],
-		EnumCategoryType.Expense,
-		flatIcon.food
-	);
-	const parentCar = createParent(
-		'Xe',
-		['Xăng xe', 'Bảo dưỡng', 'Xe Khách', 'Grab'],
-		EnumCategoryType.Expense,
-		flatIcon.fuel
-	);
-	const parentShopping = createParent(
-		'Mua sắm',
-		['Lặt vặt', 'Đồ gia dụng'],
-		EnumCategoryType.Expense,
-		flatIcon.appliances
-	);
-	const parentBeauty = createParent(
-		'Làm đẹp',
-		['Cắt tóc', 'Mỹ phẩm', 'Outfit'],
-		EnumCategoryType.Expense,
-		flatIcon.cosmetics
-	);
-	const parentEntertainment = createParent(
-		'Giải trí',
-		['Game', 'Phim'],
-		EnumCategoryType.Expense,
-		flatIcon.movies
-	);
-	const parentBill = createParent(
-		'Hoá đơn',
-		['Điện', 'Phí Quản lý', 'Internet', 'Thuê nhà'],
-		EnumCategoryType.Expense,
-		flatIcon.electricity
-	);
-
-	const income = ['Lương', 'Thưởng', 'Lãi', 'Mua bán']
-		.map((x) => createParent(x, [], EnumCategoryType.Income, flatIcon.cash))
-		.flat();
-
-	return [
-		...parentFood,
-		...parentCar,
-		...parentShopping,
-		...parentBeauty,
-		...parentEntertainment,
-		...parentBill,
-		...income
-	];
-};
-
 export const createDefaultIcon = (): IIcon[] => {
 	const defaultIcons: IIcon[] = values(flatIcon).map((x) => ({
 		_id: new ObjectId(),
@@ -97,7 +12,7 @@ export const createDefaultIcon = (): IIcon[] => {
 	}));
 
 	const arr: IIcon[] = [...defaultIcons];
-	return [EmptyIcon, ...arr];
+	return [...arr];
 };
 
 export const createCategory = (profile: IProfile): ICategory[] => {
@@ -150,7 +65,7 @@ export const createCategory = (profile: IProfile): ICategory[] => {
 		},
 		{
 			name: 'Hoá đơn',
-			idIcon: flatIcon.electricity,
+			idIcon: flatIcon.invoice,
 			children: [
 				{ name: 'Điện', idIcon: flatIcon.electricity },
 				{ name: 'Phí Quản lý', idIcon: flatIcon.management },
@@ -161,10 +76,10 @@ export const createCategory = (profile: IProfile): ICategory[] => {
 	];
 
 	const arrIncome = [
-		{ name: 'Lương', idIcon: flatIcon.cash },
-		{ name: 'Thưởng', idIcon: flatIcon.cash },
-		{ name: 'Lãi', idIcon: flatIcon.cash },
-		{ name: 'Mua bán', idIcon: flatIcon.cash }
+		{ name: 'Lương', idIcon: flatIcon.salary },
+		{ name: 'Thưởng', idIcon: flatIcon.bonus },
+		{ name: 'Lãi', idIcon: flatIcon.profit },
+		{ name: 'Mua bán', idIcon: flatIcon.trading }
 	];
 
 	const arr: ICategory[][] = arrExpense.map((category) => {
