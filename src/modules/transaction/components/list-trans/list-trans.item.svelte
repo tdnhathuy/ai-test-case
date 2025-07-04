@@ -14,6 +14,10 @@
 	// Create a reactive copy to avoid mutating the original
 	let transactionCopy = $derived(structuredClone(transaction));
 
+	const label = $derived(
+		transaction.category?.name ? transaction.category?.name : 'Chưa phân loại'
+	);
+
 	const isExpense = transaction.category?.type === 'Expense';
 </script>
 
@@ -24,12 +28,10 @@
 				<WiseIcon icon={transaction.category?.icon} size="sm" />
 			</span>
 
-			<span class="flex flex-1 items-center gap-2">
-				<span class="text-sm text-gray-500"
-					>{transaction.category?.name ? transaction.category?.name : 'Chưa phân loại'}</span
-				>
+			<Stack class="flex flex-1  items-start gap-0 	">
+				<span class="text-md font-medium">{label}</span>
 				<span class="text-sm text-gray-500">{transaction.description}</span>
-			</span>
+			</Stack>
 
 			<Stack class="items-end ">
 				<MoreVertical size={14} />

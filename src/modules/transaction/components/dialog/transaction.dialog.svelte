@@ -2,7 +2,7 @@
 	import { genDefaultTrans } from '@/lib/common/helpers';
 	import type { Transaction } from '@/lib/common/types';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
-	import { Stack, WiseDialogContent, WiseInput } from '@/lib/components/wise';
+	import { Stack, WiseDialogContent, WiseInput, WiseTextArena } from '@/lib/components/wise';
 	import { CategorySelection, WalletSelection } from '../selection';
 	import TransactionDialogFooter from './transaction.dialog.footer.svelte';
 	type Props = {
@@ -12,12 +12,10 @@
 
 	let props: Props = $props();
 
-	// Always create a fresh copy to avoid state sharing
-	let transaction = $state(structuredClone(genDefaultTrans(props.transaction)));
+	let transaction = $state(genDefaultTrans(props.transaction));
 
-	// Reset transaction when props change
 	$effect(() => {
-		transaction = structuredClone(genDefaultTrans(props.transaction));
+		transaction = genDefaultTrans(props.transaction);
 	});
 </script>
 
@@ -27,22 +25,18 @@
 			<WiseInput class="w-48 text-right" type="number" bind:value={transaction.amount} />
 		</LabelSection>
 
-		<Stack class=" justify-around">
-			<LabelSection label="Ví" vertical>
+		<Stack class=" justify-around" vertical>
+			<LabelSection vertical>
 				<WalletSelection bind:transaction />
 			</LabelSection>
 
-			<LabelSection label="Danh mục" vertical>
+			<LabelSection vertical>
 				<CategorySelection bind:transaction />
 			</LabelSection>
 		</Stack>
 
-		<LabelSection label="Ngày" vertical>
-			<WiseInput class="w-48 text-right" type="date" bind:value={transaction.date} />
-		</LabelSection>
-
-		<LabelSection label="Mô tả" vertical>
-			<WiseInput class="w-48" type="text" bind:value={transaction.description} />
+		<LabelSection label="Mô tả">
+			<WiseTextArena class="h-24 w-full" bind:value={transaction.description} />
 		</LabelSection>
 	</section>
 </WiseDialogContent>

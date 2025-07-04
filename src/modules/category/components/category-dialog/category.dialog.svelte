@@ -8,7 +8,7 @@
 		DialogTitle
 	} from '@/lib/components/ui/dialog';
 	import { WiseIconSelector } from '@/lib/components/wise';
-	import WiseInput from '@/lib/components/wise/wise-input.svelte';
+	import WiseInput from '@/lib/components/wise/input/wise-input.svelte';
 	import CategoryParentSelection from '@/modules/category/components/category-dialog/category-parent-selection.svelte';
 	import CategoryFooterDialog from './category.footer.dialog.svelte';
 	import CategoryRadio from './category.radio.svelte';

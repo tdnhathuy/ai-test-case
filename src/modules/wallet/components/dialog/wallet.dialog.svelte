@@ -3,7 +3,7 @@
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
 	import { WiseIconSelector } from '@/lib/components/wise';
 	import WiseDialogContent from '@/lib/components/wise/dialog/wise-dialog-content.svelte';
-	import WiseInput from '@/lib/components/wise/wise-input.svelte';
+	import WiseInput from '@/lib/components/wise/input/wise-input.svelte';
 	import WalletFooterDialog from './wallet.footer.dialog.svelte';
 	import WalletTypeRadio from './wallet-type.radio.svelte';
 

@@ -3,7 +3,7 @@
 	import type { Snippet } from 'svelte';
 
 	type Props = {
-		label: string;
+		label?: string;
 		children: Snippet;
 		class?: string;
 		vertical?: boolean;
@@ -20,6 +20,9 @@
 		className
 	)}
 >
-	<h1>{label}</h1>
+	{#if label}
+		<h1>{label}</h1>
+	{/if}
+
 	{@render children()}
 </section>
