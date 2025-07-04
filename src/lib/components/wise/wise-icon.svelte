@@ -28,12 +28,11 @@
 {#if !urlIcon}
 	<Loader class="animate-spin" />
 {:else}
-	<button class="flex items-center justify-center" {onclick}>
-		<img
-			draggable={false}
-			src={urlIcon}
-			alt=""
-			class={cn(sizeMap[size], onclick && 'cursor-pointer', className)}
-		/>
-	</button>
+	<img
+		draggable={false}
+		src={urlIcon}
+		alt=""
+		class={cn(sizeMap[size], onclick && 'cursor-pointer', className)}
+		{onclick}
+	/>
 {/if}

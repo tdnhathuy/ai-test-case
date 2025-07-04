@@ -2,7 +2,8 @@ export const QueryKeys = {
 	getCategory: 'getCategory',
 	getIcon: 'getIcon',
 	getWallet: 'getWallet',
-	getTrans: 'getTrans'
+	getTrans: 'getTrans',
+	getIconCollection: 'getIconCollection'
 };
 
 export const MutationKeys = {
@@ -13,5 +14,6 @@ export const MutationKeys = {
 	createCategory: 'createCategory',
 	deleteCategory: 'deleteCategory',
 	createTrans: 'createTrans',
-	updateTrans: 'updateTrans'
+	updateTrans: 'updateTrans',
+	createIconCollection: 'createIconCollection'
 };

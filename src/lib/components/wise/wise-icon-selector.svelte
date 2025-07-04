@@ -15,6 +15,7 @@
 	const query = useGetListIcon();
 
 	const icons = $derived($query.data || []);
+	console.log('icons', icons);
 
 	$effect(() => {
 		if (!icon && icons) {
@@ -28,8 +29,8 @@
 		<WiseIcon url={icon?.url ?? icons?.[0]?.url ?? ''} size={'md'} />
 	</PopoverTrigger>
 
-	<PopoverContent class="flex flex-col gap-2">
-		<div class=" flex w-16 gap-2">
+	<PopoverContent class="flex p-0">
+		<div class="grid grid-cols-6 gap-2 p-2">
 			{#each icons as iconItem}
 				<WiseIcon
 					url={iconItem.url}

@@ -1,6 +1,6 @@
 import { queryClient } from '@/lib/common/configs/query-client.config';
 import { MutationKeys, QueryKeys } from '@/lib/common/constant/key.const';
-import { ServiceCategory, ServiceTrans, ServiceWallet } from '@/lib/common/services';
+import { ServiceCategory, ServiceIcon, ServiceTrans, ServiceWallet } from '@/lib/common/services';
 import { createMutation } from '@tanstack/svelte-query';
 
 export const useCreateWallet = () => {
@@ -79,6 +79,16 @@ export const useUpdateTrans = () => {
 		mutationFn: ServiceTrans.updateTrans,
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QueryKeys.getTrans] });
+		}
+	});
+};
+
+export const useCreateIconCollection = () => {
+	return createMutation({
+		mutationKey: [MutationKeys.createIconCollection],
+		mutationFn: ServiceIcon.createIconCollection,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QueryKeys.getIconCollection] });
 		}
 	});
 };

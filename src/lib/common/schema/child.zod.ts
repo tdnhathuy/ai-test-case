@@ -1,10 +1,8 @@
 import {
 	EnumCategoryType,
-	EnumIconCode,
 	EnumIconType,
 	EnumWalletType,
 	type ICategoryType,
-	type IIconCode,
 	type IIconType,
 	type IWalletType
 } from '@/lib/common/enum/collection.enum';
@@ -17,16 +15,20 @@ export const zodIdCommon = zId();
 
 export const zodIcon = z.object({
 	_id: zodIdCommon,
-	url: z.string(),
-	code: z.enum(Object.keys(EnumIconCode) as [IIconCode, ...IIconCode[]]),
+	url: z.string().optional().nullable(),
+	code: z.string().optional().nullable(),
 	type: z.enum(Object.keys(EnumIconType) as [IIconType, ...IIconType[]])
 });
 
-// Chỉ lưu ObjectId cho các field reference (idIcon, idCategory, idWallet, idParent)
+export const zodIconCollection = z.object({
+	_id: zodIdCommon,
+	name: z.string(),
+	icon: z.array(zodIcon)
+});
 
 export const zodWallet = z.object({
 	_id: zodIdCommon,
-	idIcon: zodIdCommon, // chỉ ObjectId, không phải { _id: ... }
+	idIcon: zodIdCommon,
 	name: z.string(),
 	initBalance: z.number(),
 	type: z.enum(Object.keys(EnumWalletType) as [IWalletType, ...IWalletType[]])
@@ -34,9 +36,9 @@ export const zodWallet = z.object({
 
 export const zodCategory = z.object({
 	_id: zodIdCommon,
-	idIcon: zodIdCommon, // chỉ ObjectId
+	idIcon: zodIdCommon,
 	name: z.string(),
-	idParent: zodIdCommon.optional().nullable(), // chỉ ObjectId hoặc null
+	idParent: zodIdCommon.optional().nullable(),
 	type: z.enum(Object.keys(EnumCategoryType) as [ICategoryType, ...ICategoryType[]])
 });
 

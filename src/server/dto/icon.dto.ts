@@ -1,3 +1,4 @@
+import { convertIdFlatIcon } from '@/lib/common/helpers';
 import type { IProfile } from '@/lib/common/schema/app.schema';
 import type { Icon } from '@/lib/common/types/app.type';
 import { ObjectId } from 'mongodb';
@@ -6,9 +7,8 @@ export const DTOIcon = {
 	fromProfile: (profile: IProfile): Icon[] => {
 		return profile.icon.map((icon) => ({
 			id: icon._id.toString(),
-			url: icon.url,
-			code: icon.code,
-			type: icon.type
+			code: icon.code ?? '',
+			url: convertIdFlatIcon(icon.code ?? '') ?? ''
 		}));
 	},
 
@@ -16,9 +16,8 @@ export const DTOIcon = {
 		const icon = profile.icon.find((icon) => icon._id.toString() === id.toString());
 		return {
 			id: icon?._id.toString() ?? '',
-			url: icon?.url ?? '',
-			code: icon?.code ?? 'Default',
-			type: icon?.type ?? 'Default'
+			code: icon?.code ?? '',
+			url: convertIdFlatIcon(icon?.code ?? '') ?? ''
 		};
 	}
 };

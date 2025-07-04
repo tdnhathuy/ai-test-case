@@ -5,7 +5,7 @@ import {
 	zodTransaction,
 	zodWallet
 } from '@/lib/common/schema/child.zod';
-import { extendZod, zId } from '@zodyac/zod-mongoose';
+import { extendZod } from '@zodyac/zod-mongoose';
 import { z } from 'zod';
 
 extendZod(z);

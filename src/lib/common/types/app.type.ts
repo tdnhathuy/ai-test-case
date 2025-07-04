@@ -35,9 +35,8 @@ export interface Transaction {
 }
 export interface Icon {
 	id: string;
-	url: string;
 	code: string;
-	type: string;
+	url: string;
 }
 export interface Wallet {
 	id: string;
@@ -45,4 +44,10 @@ export interface Wallet {
 	icon: Icon | null;
 	initBalance: number;
 	type: IWalletType;
+}
+
+export interface IconCollection {
+	id: string;
+	name: string;
+	icon: Icon[];
 }

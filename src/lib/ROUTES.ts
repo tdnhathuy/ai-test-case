@@ -11,11 +11,8 @@
 const PAGES = {
   "/": `/`,
   "/category": `/category`,
-  "/create-test-case": `/create-test-case`,
-  "/create-test-case/step-1": `/create-test-case/step-1`,
-  "/create-test-case/step-2": `/create-test-case/step-2`,
-  "/create-test-case/step-3": `/create-test-case/step-3`,
   "/home": `/home`,
+  "/icon": `/icon`,
   "/transaction": `/transaction`,
   "/wallet": `/wallet`,
   "/auth": `/auth`
@@ -27,6 +24,8 @@ const PAGES = {
 const SERVERS = {
   "GET /api/auth/session": `/api/auth/session`,
   "GET /api/auth/verify-token": `/api/auth/verify-token`,
+  "POST /api/icon/collection": `/api/icon/collection`,
+  "GET /api/icon/collection": `/api/icon/collection`,
   "GET /api/profile/category": `/api/profile/category`,
   "POST /api/profile/category": `/api/profile/category`,
   "PATCH /api/profile/category/[id]": (params: { id: (string | number) }) => {
@@ -175,8 +174,8 @@ export function route<T extends keyof AllTypes>(key: T, ...params: any[]): strin
 * ```
 */
 export type KIT_ROUTES = {
-  PAGES: { '/': never, '/category': never, '/create-test-case': never, '/create-test-case/step-1': never, '/create-test-case/step-2': never, '/create-test-case/step-3': never, '/home': never, '/transaction': never, '/wallet': never, '/auth': never }
-  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'GET /api/profile/category': never, 'POST /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'DELETE /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never, 'GET /api/profile/transaction': never, 'POST /api/profile/transaction': never, 'PUT /api/profile/transaction/[id]': 'id', 'DELETE /api/profile/transaction/[id]': 'id', 'GET /api/profile/wallet': never, 'POST /api/profile/wallet': never, 'PATCH /api/profile/wallet/[id]': 'id', 'DELETE /api/profile/wallet/[id]': 'id' }
+  PAGES: { '/': never, '/category': never, '/home': never, '/icon': never, '/transaction': never, '/wallet': never, '/auth': never }
+  SERVERS: { 'GET /api/auth/session': never, 'GET /api/auth/verify-token': never, 'POST /api/icon/collection': never, 'GET /api/icon/collection': never, 'GET /api/profile/category': never, 'POST /api/profile/category': never, 'PATCH /api/profile/category/[id]': 'id', 'DELETE /api/profile/category/[id]': 'id', 'GET /api/profile/icon': never, 'GET /api/profile/setup': never, 'GET /api/profile/transaction': never, 'POST /api/profile/transaction': never, 'PUT /api/profile/transaction/[id]': 'id', 'DELETE /api/profile/transaction/[id]': 'id', 'GET /api/profile/wallet': never, 'POST /api/profile/wallet': never, 'PATCH /api/profile/wallet/[id]': 'id', 'DELETE /api/profile/wallet/[id]': 'id' }
   ACTIONS: { 'default /signin': never, 'default /signout': never }
   LINKS: Record<string, never>
   Params: { 'id': never }

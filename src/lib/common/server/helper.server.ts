@@ -1,4 +1,5 @@
-import type { IProfile } from '@/lib/common/schema';
+import type { IIconCollectionModel, IProfile, IProfileModel } from '@/lib/common/schema';
+import { createNewProfile } from '@/server/repository/profile.repo';
 import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { ObjectId } from 'mongodb';
@@ -8,6 +9,8 @@ interface AuthenticatedProfileResult extends RequestEvent {
 	profile: HydratedDocument<IProfile>;
 	user: any;
 	email: string;
+	ProfileModel: IProfileModel;
+	IconCollectionModel: IIconCollectionModel;
 }
 
 export async function validateInfo(event: RequestEvent): Promise<AuthenticatedProfileResult> {
@@ -16,7 +19,7 @@ export async function validateInfo(event: RequestEvent): Promise<AuthenticatedPr
 		throw error(401, 'User not found');
 	}
 
-	const { ProfileModel } = await import('@/lib/common/schema');
+	const { ProfileModel, IconCollectionModel } = await import('@/lib/common/schema');
 
 	const profile = await ProfileModel.findOne({ email: user.email });
 
@@ -24,7 +27,7 @@ export async function validateInfo(event: RequestEvent): Promise<AuthenticatedPr
 		throw error(401, 'Profile not found');
 	}
 
-	return { profile, user, email: user.email!, ...event };
+	return { profile, user, email: user.email!, ProfileModel, IconCollectionModel, ...event };
 }
 
 export const createId = (id: string | undefined) => {

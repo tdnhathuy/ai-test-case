@@ -28,6 +28,9 @@
 		<a href={route('/wallet')}>
 			<SidebarButton icon={Wallet} label="Wallet" />
 		</a>
+		<a href={route('/icon')}>
+			<SidebarButton icon={Wallet} label="Icon" />
+		</a>
 	</LabelSection>
 
 	<LabelSection label="Functions">

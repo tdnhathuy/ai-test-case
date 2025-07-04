@@ -32,3 +32,10 @@ export const useGetListTrans = () => {
 		queryFn: ServiceTrans.getTrans
 	});
 };
+
+export const useGetListIconCollection = () => {
+	return createQuery({
+		queryKey: [QueryKeys.getIconCollection],
+		queryFn: ServiceIcon.getIconCollection
+	});
+};
