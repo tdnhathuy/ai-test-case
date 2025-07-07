@@ -1,7 +1,8 @@
 <script lang="ts">
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
-	import ButtonBase from '../button/button-base.svelte';
+	import WiseButton from '@/lib/components/wise/button/wise-button.svelte';
+	import { cn } from '@/lib/utils';
+	import { ChevronLeft } from '@lucide/svelte';
 	import SidebarFooter from './sidebar.footer.svelte';
 	import SidebarHeader from './sidebar.header.svelte';
 
@@ -19,11 +20,16 @@
 
 	<SidebarFooter />
 
-	<ButtonBase size="icon" onclick={() => sidebar.toggle()} class="absolute -right-4 bottom-12 z-10">
-		{#if isCollapsed}
-			<ChevronRight />
-		{:else}
-			<ChevronLeft />
-		{/if}
-	</ButtonBase>
+	<WiseButton
+		size="icon"
+		variant="ghost"
+		onclick={() => sidebar.toggle()}
+		class={cn(
+			'absolute -right-4 bottom-12 z-10 rounded-full',
+			'bg-white transition-transform',
+			isCollapsed ? 'rotate-180' : 'rotate-0'
+		)}
+	>
+		<ChevronLeft />
+	</WiseButton>
 </Sidebar.Root>

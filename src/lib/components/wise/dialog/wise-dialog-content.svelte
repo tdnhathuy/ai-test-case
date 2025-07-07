@@ -15,18 +15,20 @@
 		class?: string;
 		title?: string;
 		footer?: Snippet;
-		
+		hideCloseButton?: boolean;
 	};
-	const { children, class: className, title, footer }: Props = $props();
+	const { children, class: className, title, footer, hideCloseButton }: Props = $props();
 </script>
 
 {#snippet defaultHeader(title: string)}
 	<DialogHeader class="flex flex-row items-start justify-between gap-10">
 		<DialogTitle>{title}</DialogTitle>
 
-		<DialogClose class="cursor-pointer">
-			<X />
-		</DialogClose>
+		{#if !hideCloseButton}
+			<DialogClose class="cursor-pointer">
+				<X />
+			</DialogClose>
+		{/if}
 	</DialogHeader>
 {/snippet}
 

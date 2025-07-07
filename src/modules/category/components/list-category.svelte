@@ -13,17 +13,19 @@
 	<h2 class="text-2xl font-bold">{title}</h2>
 
 	<ScrollArea class="flex-1 overflow-hidden" orientation="vertical">
-		<ul class="flex flex-col gap-2">
+		<ul class="flex flex-col">
 			{#each categories as category (category.id)}
-				<li class="flex items-start gap-2 px-4 py-2 pb-4">
+				<li class="flex items-start gap-2 px-4 py-2 pb-0">
 					<span class="flex flex-1 flex-col gap-2">
 						{@render categoryItem(category, false)}
 
-						<span class="ml-20 flex flex-col gap-2 divide-y">
-							{#each category.children || [] as child (child.id)}
-								{@render categoryItem(child, true)}
-							{/each}
-						</span>
+						{#if category.children?.length}
+							<span class="ml-12 flex flex-col">
+								{#each category.children || [] as child (child.id)}
+									{@render categoryItem(child, true)}
+								{/each}
+							</span>
+						{/if}
 					</span>
 				</li>
 			{/each}
@@ -32,13 +34,13 @@
 </div>
 
 {#snippet categoryItem(category: Category, isChild: boolean = false)}
-	{@const iconSize = isChild ? 'md' : 'lg'}
+	{@const iconSize = isChild ? 'md' : 'md'}
 
 	<Dialog>
 		<DialogTrigger>
 			<span
 				class={cn(
-					'flex cursor-pointer items-center gap-4 p-2 px-4 transition-all',
+					'm-0 flex cursor-pointer items-center gap-4 p-2 px-4 transition-all',
 					'hover:bg-accent hover:rounded-md'
 				)}
 			>

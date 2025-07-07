@@ -16,10 +16,12 @@
 	</div>
 {:else}
 	<section class="flex h-full w-full flex-col gap-4">
-		<ButtonCreateCategory />
-		<div class="flex h-full flex-1 gap-4">
-			<ListCategory title="Thu" categories={income} />
-			<ListCategory title="Chi" categories={expense} />
+		<div class="mx-auto h-full w-2xl bg-red-300">
+			<ButtonCreateCategory />
+			<div class="flex h-full flex-1 gap-4">
+				<ListCategory title="Thu" categories={income} />
+				<ListCategory title="Chi" categories={expense} />
+			</div>
 		</div>
 	</section>
 {/if}

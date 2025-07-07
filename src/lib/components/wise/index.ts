@@ -6,3 +6,4 @@ export { default as WiseInput } from './input/wise-input.svelte';
 export { default as Stack } from './stack.svelte';
 export { default as WiseTextArena } from './input/wise-text-arena.svelte';
 export { default as WiseInputDate } from './input/wise-date-picker.svelte';
+export { default as WiseBackground } from './wise-bg.svelte';
