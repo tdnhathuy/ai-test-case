@@ -1,13 +1,18 @@
 import { getBody, responseSuccess } from '@/lib/common/helpers';
-import { validateInfo } from '@/lib/common/server';
-import type { PayloadCreateTrans } from '@/lib/common/services';
+import { validateInfo, parseParams } from '@/lib/common/server';
+import type { PayloadCreateTrans, PayloadGetTrans } from '@/lib/common/services';
 import { DTOTransaction } from '@/server/dto';
 import { ObjectId } from 'mongodb';
+import queryString from 'query-string';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async (event) => {
 	const { profile } = await validateInfo(event);
-	return responseSuccess({ data: DTOTransaction.fromProfile(profile) });
+
+	const params = parseParams<PayloadGetTrans>(event);
+	return responseSuccess({
+		data: DTOTransaction.fromProfile(profile, params)
+	});
 };
 
 export const POST: RequestHandler = async (event) => {

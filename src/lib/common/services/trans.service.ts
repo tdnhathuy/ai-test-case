@@ -3,8 +3,9 @@ import type { Transaction } from '@/lib/common/types/app.type';
 import { route } from '@/lib/ROUTES';
 
 export const ServiceTrans = {
-	getTrans: async () => {
-		return api.get<Transaction[]>(route('GET /api/profile/transaction'));
+	getTrans: async (params?: PayloadGetTrans) => {
+		const url = route('GET /api/profile/transaction');
+		return api.get<Transaction[]>(url, { params });
 	},
 	createTrans: async (payload: PayloadCreateTrans) => {
 		return api.post(route('POST /api/profile/transaction'), payload);
@@ -14,6 +15,10 @@ export const ServiceTrans = {
 		return api.put(url, payload);
 	}
 };
+
+export interface PayloadGetTrans {
+	unclassified?: boolean;
+}
 
 export interface PayloadCreateTrans {
 	transaction: Transaction;

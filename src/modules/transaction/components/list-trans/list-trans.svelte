@@ -4,11 +4,13 @@
 	import type { Transaction } from '@/lib/common/types';
 	import { ScrollArea } from '@/lib/components/ui/scroll-area';
 	import { storeDialogTransaction } from '@/lib/store/dialog.store';
+	import { storeFilterAPI } from '@/lib/store/filter.store';
 	import { DialogTransaction } from '@/modules/transaction/components/dialog';
 	import groupBy from 'lodash/groupBy';
 	import orderBy from 'lodash/orderBy';
 	import ListTransItem from './list-trans.item.svelte';
-	const queryTransaction = useGetListTrans();
+
+	const queryTransaction = $derived(useGetListTrans($storeFilterAPI.getTransaction));
 
 	const listTrans = $derived($queryTransaction.data ?? []);
 
@@ -27,7 +29,7 @@
 	};
 </script>
 
-<ScrollArea class="h-full" orientation="vertical">
+<ScrollArea class="h-[90%]" orientation="vertical">
 	{#if $queryTransaction.isSuccess}
 		<div class="flex flex-col gap-2 px-2 pr-4 pb-20">
 			{#each groupedTrans() as [title, transactions]}

@@ -1,9 +1,9 @@
 import { QueryKeys } from '@/lib/common/constant/key.const';
+import { ServiceTrans, type PayloadGetTrans } from '@/lib/common/services/trans.service';
 import { createQuery } from '@tanstack/svelte-query';
 import { ServiceCategory } from '../category.service';
 import { ServiceIcon } from '../icon.service';
 import { ServiceWallet } from '../wallet.service';
-import { ServiceTrans } from '@/lib/common/services/trans.service';
 
 export const useGetListWallet = () => {
 	return createQuery({
@@ -26,10 +26,12 @@ export const useGetListIcon = () => {
 	});
 };
 
-export const useGetListTrans = () => {
+export const useGetListTrans = (params?: PayloadGetTrans) => {
+	const queryKey = [QueryKeys.getTrans, JSON.stringify(params)];
 	return createQuery({
-		queryKey: [QueryKeys.getTrans],
-		queryFn: ServiceTrans.getTrans
+		queryKey: queryKey,
+		queryFn: () => ServiceTrans.getTrans(params),
+		refetchOnMount: true
 	});
 };
 

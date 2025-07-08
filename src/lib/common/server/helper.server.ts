@@ -1,9 +1,10 @@
 import type { IIconCollectionModel, IProfile, IProfileModel } from '@/lib/common/schema';
-import { createNewProfile } from '@/server/repository/profile.repo';
 import type { RequestEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import { ObjectId } from 'mongodb';
 import type { HydratedDocument } from 'mongoose';
+import queryString from 'query-string';
+import type { ParseOptions } from 'querystring';
 
 interface AuthenticatedProfileResult extends RequestEvent {
 	profile: HydratedDocument<IProfile>;
@@ -33,4 +34,13 @@ export async function validateInfo(event: RequestEvent): Promise<AuthenticatedPr
 export const createId = (id: string | undefined) => {
 	if (!id) return null;
 	return new ObjectId(id);
+};
+
+export const parseParams = <T>(event: RequestEvent, opts?: ParseOptions): T => {
+	const defaultOpts = {
+		parseBooleans: true,
+		parseNumbers: true,
+		...opts
+	};
+	return queryString.parse(event.url.search, defaultOpts) as T;
 };
