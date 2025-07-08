@@ -7,12 +7,15 @@
 		ServiceWallet
 	} from '@/lib/common/services';
 	import LabelSection from '@/lib/components/svelte/label-section.svelte';
+	import ProfileInfo from '@/lib/components/svelte/sidebar/header/profile-info.svelte';
 	import SidebarButton from '@/lib/components/svelte/sidebar/sidebar-button.svelte';
 	import { route } from '@/lib/ROUTES';
 	import { Home, LayoutGrid, LayoutList, User, Wallet } from '@lucide/svelte';
 </script>
 
 <Header class="">
+	<ProfileInfo />
+
 	<LabelSection label="Pages">
 		<a href={route('/')}>
 			<SidebarButton icon={Home} label="Home" />

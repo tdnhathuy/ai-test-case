@@ -27,7 +27,7 @@
 </script>
 
 {#if !urlIcon}
-	<!-- <Loader class="animate-spin" /> -->
+	<Loader class="animate-spin" />
 {:else}
 	<img
 		draggable={false}

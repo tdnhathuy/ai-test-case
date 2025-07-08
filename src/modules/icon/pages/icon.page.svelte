@@ -2,7 +2,7 @@
 	import { flatIcon } from '@/lib/common/configs/cdn.config';
 	import { convertIdFlatIcon } from '@/lib/common/helpers';
 	import { Stack, WiseButton, WiseInput } from '@/lib/components/wise';
-	import { values } from 'lodash';
+	import values from 'lodash/values';
 
 	let iconId = $state('');
 	let iconUrl = $state('');
@@ -12,6 +12,11 @@
 		iconUrl = convertIdFlatIcon(iconId);
 	}
 </script>
+
+<svelte:head>
+	<title>Icon</title>
+	<meta name="description" content="Icon" />
+</svelte:head>
 
 <section>
 	<WiseButton

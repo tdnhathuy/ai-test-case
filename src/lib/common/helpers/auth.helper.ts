@@ -1,10 +1,10 @@
 import { browser } from '$app/environment';
-import type { Session } from '@auth/sveltekit';
+import type { Session, User } from '@auth/sveltekit';
 import axios from 'axios';
 
-type Response = { session: Session };
+type Response = { session: Session; user: User };
 const clientRequest = axios.create();
-const fetchAccessToken = () => clientRequest.get<Response>('/api/auth/session');
+export const fetchAccessToken = () => clientRequest.get<Response>('/api/auth/session');
 
 let tokenCache: {
 	token: string | null;
@@ -24,6 +24,11 @@ export async function getAuthToken(): Promise<string | null> {
 		console.error('Error getting auth token:', error);
 		return null;
 	}
+}
+
+export async function getUser() {
+	const response = await fetchAccessToken();
+	return response.data?.user || null;
 }
 
 export async function getCachedAuthToken(): Promise<string | null> {

@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { formatDate } from '@/lib/common/helpers';
 	import { useGetListTrans } from '@/lib/common/services';
+	import type { Transaction } from '@/lib/common/types';
 	import { ScrollArea } from '@/lib/components/ui/scroll-area';
+	import { storeDialogTransaction } from '@/lib/store/dialog.store';
+	import { DialogTransaction } from '@/modules/transaction/components/dialog';
 	import groupBy from 'lodash/groupBy';
 	import orderBy from 'lodash/orderBy';
 	import ListTransItem from './list-trans.item.svelte';
-	import { formatDate } from '@/lib/common/helpers';
 	const queryTransaction = useGetListTrans();
 
 	const listTrans = $derived($queryTransaction.data ?? []);
@@ -14,6 +17,11 @@
 		const grouped = groupBy(sorted, (x) => formatDate(x.date));
 		return Object.entries(grouped);
 	});
+
+	const openDialog = (transaction: Transaction) => {
+		$storeDialogTransaction.transaction = transaction;
+		$storeDialogTransaction.open = true;
+	};
 </script>
 
 <ScrollArea class="h-full" orientation="vertical">
@@ -22,12 +30,13 @@
 			{#each groupedTrans() as [title, transactions]}
 				<p>{title}</p>
 				{#each transactions as transaction}
-					<ListTransItem {transaction} />
+					<button onclick={() => openDialog(transaction)}>
+						<ListTransItem {transaction} />
+					</button>
 				{/each}
 			{/each}
-			<!-- {#each listTrans as transaction}
-				<ListTransItem {transaction} />
-			{/each} -->
 		</div>
 	{/if}
+
+	<DialogTransaction />
 </ScrollArea>

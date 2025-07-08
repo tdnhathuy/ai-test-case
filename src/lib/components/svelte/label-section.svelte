@@ -4,7 +4,7 @@
 
 	type Props = {
 		label?: string;
-		children: Snippet;
+		children?: Snippet;
 		class?: string;
 		vertical?: boolean;
 	};
@@ -12,17 +12,14 @@
 	let { label, children, class: className, vertical }: Props = $props();
 </script>
 
-<section
-	class={cn(
-		'flex flex-col gap-2',
-		vertical && 'flex-row items-center justify-between ',
-		//
-		className
-	)}
+<div
+	class={cn('flex flex-col gap-2', vertical && 'flex-row items-center justify-between ', className)}
 >
 	{#if label}
 		<h1>{label}</h1>
 	{/if}
 
-	{@render children()}
-</section>
+	{#if children}
+		{@render children()}
+	{/if}
+</div>

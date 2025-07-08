@@ -4,7 +4,7 @@
 </script>
 
 <div class="flex justify-between px-4 py-2">
-	<WiseButton>Filter</WiseButton>
+	<WiseButton variant="gradient" class="h-fit w-fit">Filter</WiseButton>
 
 	<ButtonDialogCreateTrans />
 </div>

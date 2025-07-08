@@ -10,9 +10,10 @@
 	} from '@/lib/components/ui/popover';
 	import { ScrollArea } from '@/lib/components/ui/scroll-area';
 	import { WiseButton, WiseIcon } from '@/lib/components/wise';
+	import { WrapperSelector } from '@/modules/transaction/components/selection';
 
 	type Props = {
-		transaction: Transaction;
+		transaction?: Transaction;
 	};
 	let { transaction = $bindable() }: Props = $props();
 
@@ -23,17 +24,21 @@
 	const listCategoryIncome = $derived(getListIncome(listCategory));
 	const listCategoryExpense = $derived(getListExpense(listCategory));
 
+	const icon = $derived(transaction?.category?.icon ?? null);
+	const title = $derived(transaction?.category?.name ?? 'Chưa phân loại');
+
 	const onSelectCategory = (category: Category) => {
-		transaction.category = category;
+		console.log('category', category);
+		console.log('transaction', transaction);
+		if (transaction) {
+			transaction.category = category;
+		}
 	};
 </script>
 
 <Popover>
 	<PopoverTrigger>
-		<WiseButton variant="outline" class="w-44">
-			<span>{transaction.category?.name ?? 'Chưa phân loại'}</span>
-			<WiseIcon icon={transaction.category?.icon} size="sm" />
-		</WiseButton>
+		<WrapperSelector {icon} {title} />
 	</PopoverTrigger>
 
 	<PopoverContent class=" flex h-fit w-fit gap-2 p-2  pr-1">

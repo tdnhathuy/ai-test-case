@@ -1,3 +1,8 @@
+<svelte:head>
+	<title>Home</title>
+	<meta name="description" content="Home" />
+</svelte:head>
+
 <page>
 	<div>1</div>
 	<div>1</div>

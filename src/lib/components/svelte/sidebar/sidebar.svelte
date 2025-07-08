@@ -4,13 +4,13 @@
 	import { cn } from '@/lib/utils';
 	import { ChevronLeft } from '@lucide/svelte';
 	import SidebarFooter from './sidebar.footer.svelte';
-	import SidebarHeader from './sidebar.header.svelte';
+	import SidebarHeader from './header/sidebar.header.svelte';
 
 	const sidebar = Sidebar.useSidebar();
 	const isCollapsed = $derived(sidebar.state === 'collapsed');
 </script>
 
-<Sidebar.Root collapsible="icon">
+<Sidebar.Root collapsible="icon" class="">
 	<SidebarHeader />
 
 	<Sidebar.Content>
