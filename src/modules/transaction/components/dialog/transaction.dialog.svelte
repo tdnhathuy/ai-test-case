@@ -11,9 +11,9 @@
 	import { ButtonCreateTrans, ButtonUpdateTrans } from '../button';
 	import { SelectorCategory, SelectorWallet } from '../selection';
 
-	const isCreate = $derived($storeDialogTransaction.isCreate);
+	const mode = $derived($storeDialogTransaction.mode);
 
-	const title = $derived(isCreate ? 'Thêm giao dịch' : 'Chi tiết giao dịch');
+	const title = $derived(mode === 'create' ? 'Thêm giao dịch' : 'Cập nhật giao dịch');
 
 	let transaction = $state($storeDialogTransaction.transaction);
 
@@ -25,8 +25,6 @@
 {#if transaction}
 	<Dialog bind:open={$storeDialogTransaction.open}>
 		<WiseDialogContent {title}>
-			<span>{transaction.amount}</span>
-
 			<div class="grid w-full grid-cols-2 gap-4">
 				<LabelSection class="col-span-2" label="Số tiền">
 					<WiseInput
@@ -51,7 +49,7 @@
 				<WiseInputDate bind:value={transaction.date} class="col-span-1" />
 
 				<div class="col-span-1 flex justify-end">
-					{#if $storeDialogTransaction.isCreate}
+					{#if $storeDialogTransaction.mode === 'create'}
 						<ButtonCreateTrans bind:transaction />
 					{:else}
 						<ButtonUpdateTrans bind:transaction />

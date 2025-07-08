@@ -4,11 +4,11 @@ import { writable } from 'svelte/store';
 type DialogTransaction = {
 	open: boolean;
 	transaction: Transaction | undefined;
-	isCreate: boolean;
+	mode: 'create' | 'update';
 };
 
 export const storeDialogTransaction = writable<DialogTransaction>({
 	open: false,
 	transaction: undefined,
-	isCreate: false
+	mode: 'create'
 });

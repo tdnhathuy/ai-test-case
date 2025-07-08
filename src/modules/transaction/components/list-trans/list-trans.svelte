@@ -19,8 +19,11 @@
 	});
 
 	const openDialog = (transaction: Transaction) => {
-		$storeDialogTransaction.transaction = transaction;
-		$storeDialogTransaction.open = true;
+		storeDialogTransaction.set({
+			open: true,
+			mode: 'update',
+			transaction
+		});
 	};
 </script>
 

@@ -5,7 +5,7 @@
 
 	const onOpenDialog = () => {
 		$storeDialogTransaction.open = true;
-		$storeDialogTransaction.isCreate = true;
+		$storeDialogTransaction.mode = 'create';
 		$storeDialogTransaction.transaction = {
 			id: '',
 			amount: 0,
